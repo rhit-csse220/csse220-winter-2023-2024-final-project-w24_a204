@@ -3,11 +3,11 @@ package mainApp;
 
 /**
  * Class: MainApp
- * @author Put your team name here
+ * @author W24_A204 Michael Ramsdell and Oscar Zhang
  * <br>Purpose: Top level class for CSSE220 Project containing main method 
  * <br>Restrictions: None
  */
-public class MainApp {
+public class JetpackJoyrideMain {
 	
 	
 	private void runApp() {
@@ -20,8 +20,8 @@ public class MainApp {
 	 * @param args unused
 	 */
 	public static void main(String[] args) {
-		MainApp mainApp = new MainApp();
-		mainApp.runApp();		
+		JetpackJoyrideMain JetpackJoyrideMain = new JetpackJoyrideMain();
+		JetpackJoyrideMain.runApp();		
 	} // main
 
 }
