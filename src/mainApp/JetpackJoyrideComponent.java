@@ -9,4 +9,8 @@ public class JetpackJoyrideComponent {
 	public void AddCollidables() {
 		
 	}
+	
+	public void loadLevel() {
+		
+	}
 }
