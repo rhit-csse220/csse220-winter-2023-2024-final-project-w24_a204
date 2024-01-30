@@ -23,7 +23,6 @@ public class MainApp {
 		MainApp mainApp = new MainApp();
 		JetpackJoyrideViewer viewer = new JetpackJoyrideViewer();
 		viewer.ScreenMain();
-		viewer.ReadFile("level/level1.txt");
 		mainApp.runApp();		
 	} // main
 

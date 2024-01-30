@@ -1,7 +1,18 @@
 package mainApp;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import javax.swing.JComponent;
+
 //hi
-public class JetpackJoyrideComponent {
+public class JetpackJoyrideComponent extends JComponent{
+	private static final int PIXEL_SIZE = 50;
 	
+	private ArrayList<Collidable> collidables = new ArrayList<Collidable>();
+
 	public void AddPlayer() {
 		
 	}
@@ -12,5 +23,39 @@ public class JetpackJoyrideComponent {
 	
 	public void loadLevel() {
 		
+	}
+	
+	public void ReadFile(String filename) {
+		int countLines = 0;
+		File file = new File(filename);
+		
+		
+		try {
+			Scanner scanner = new Scanner(file);
+			while(scanner.hasNext()) {
+				String line = scanner.nextLine();
+				if(line.length() != 24) {
+					countLines = 11;
+					break;
+				}
+				countLines++;
+				for(int i = 0; i < line.length(); i++) {
+					if(line.charAt(i)== 'B') {
+						Obstacle obstacle = new Obstacle(i*PIXEL_SIZE, countLines*PIXEL_SIZE, false);
+						collidables.add(obstacle);
+					}
+				}
+			}
+			scanner.close();
+			if(countLines == 10) {
+				System.out.println("Success!");
+			} else {
+				System.err.println("InvalidLevelFormatException");
+				System.err.println("Make sure the text file for the level is 24x10 characters in size!");
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("File Not Found: " + filename);
+			e.printStackTrace();
+		}
 	}
 }
