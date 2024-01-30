@@ -1,5 +1,9 @@
 package mainApp;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import javax.swing.JFrame;
 
 //hi
@@ -14,8 +18,24 @@ public class JetpackJoyrideViewer {
 		frame.setVisible(true);
 	}
 	
-	public void LoadLevel() {
-		
+	public void ReadFile(String filename) {
+		File file = new File(filename);
+		try {
+			Scanner scanner = new Scanner(file);
+			while(scanner.hasNext()) {
+				String line = scanner.nextLine();
+				System.out.println("Success!");
+//				for(int i = 0; i < line.length(); i++) {
+//					if(line.charAt(i)== '.') {
+//						
+//					}
+//				}
+			}
+			scanner.close();
+		} catch (FileNotFoundException e) {
+			System.err.println("File Not Found: " + filename);
+			e.printStackTrace();
+		}
 	}
 	
 	public void updateScreen() {
