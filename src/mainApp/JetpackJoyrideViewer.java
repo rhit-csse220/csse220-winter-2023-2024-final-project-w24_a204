@@ -19,12 +19,17 @@ public class JetpackJoyrideViewer {
 	}
 	
 	public void ReadFile(String filename) {
+		int countLines = 0;
 		File file = new File(filename);
 		try {
 			Scanner scanner = new Scanner(file);
 			while(scanner.hasNext()) {
 				String line = scanner.nextLine();
-				System.out.println("Success!");
+				if(line.length() != 24) {
+					countLines = 11;
+					break;
+				}
+				countLines++;
 //				for(int i = 0; i < line.length(); i++) {
 //					if(line.charAt(i)== '.') {
 //						
@@ -32,6 +37,11 @@ public class JetpackJoyrideViewer {
 //				}
 			}
 			scanner.close();
+			if(countLines == 10) {
+				System.out.println("Success!");
+			} else {
+				System.err.println("InvalidLevelFormatException");
+			}
 		} catch (FileNotFoundException e) {
 			System.err.println("File Not Found: " + filename);
 			e.printStackTrace();
