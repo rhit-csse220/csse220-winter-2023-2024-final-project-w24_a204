@@ -1,5 +1,5 @@
 package mainApp;
 
-public class Coin {
+public class Coin extends Collidable{
 
 }
