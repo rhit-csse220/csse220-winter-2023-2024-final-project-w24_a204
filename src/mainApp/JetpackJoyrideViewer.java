@@ -19,7 +19,7 @@ public class JetpackJoyrideViewer {
 		try {
 		component.readFile("level/level1.txt");
 		}catch(IllegalArgumentException e) {
-			System.err.println("Illegal File Input");
+			System.err.println("Illegal File Input Exception");
 			System.err.println("File has to be 10x24");
 		}
 		frame.setVisible(true);
