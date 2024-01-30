@@ -41,6 +41,7 @@ public class JetpackJoyrideViewer {
 				System.out.println("Success!");
 			} else {
 				System.err.println("InvalidLevelFormatException");
+				System.err.println("Make sure the text file for the level is 24x10 characters in size!");
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("File Not Found: " + filename);
