@@ -21,6 +21,8 @@ public class MainApp {
 	 */
 	public static void main(String[] args) {
 		MainApp mainApp = new MainApp();
+		JetpackJoyrideViewer viewer = new JetpackJoyrideViewer();
+		viewer.ScreenMain();
 		mainApp.runApp();		
 	} // main
 
