@@ -25,7 +25,7 @@ public class JetpackJoyrideComponent extends JComponent{
 		
 	}
 	
-	public void ReadFile(String filename) {
+	public void readFile(String filename) {
 		int countLines = 0;
 		File file = new File(filename);
 		
@@ -50,8 +50,7 @@ public class JetpackJoyrideComponent extends JComponent{
 			if(countLines == 10) {
 				System.out.println("Success!");
 			} else {
-				System.err.println("InvalidLevelFormatException");
-				System.err.println("Make sure the text file for the level is 24x10 characters in size!");
+				throw new IllegalArgumentException();
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("File Not Found: " + filename);

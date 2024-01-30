@@ -16,7 +16,12 @@ public class JetpackJoyrideViewer {
 		frame.setLocation(100, 100);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JetpackJoyrideComponent component = new JetpackJoyrideComponent();
-		component.ReadFile("level/level1.txt");
+		try {
+		component.readFile("level/level1.txt");
+		}catch(IllegalArgumentException e) {
+			System.err.println("Illegal File Input");
+			System.err.println("File has to be 10x24");
+		}
 		frame.setVisible(true);
 	}
 	
