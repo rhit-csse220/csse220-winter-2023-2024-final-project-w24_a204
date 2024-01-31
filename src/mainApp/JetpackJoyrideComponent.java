@@ -40,13 +40,26 @@ public class JetpackJoyrideComponent extends JComponent{
 					countLines = 11;
 					break;
 				}
-				countLines++;
+				
 				for(int i = 0; i < line.length(); i++) {
 					if(line.charAt(i)== 'B') {
 						Obstacle obstacle = new Obstacle(i*PIXEL_SIZE, countLines*PIXEL_SIZE, false);
 						collidables.add(obstacle);
 					}
+					if(line.charAt(i)== 'X') {
+						Obstacle obstacle = new Obstacle(i*PIXEL_SIZE, countLines*PIXEL_SIZE, true);
+						collidables.add(obstacle);
+					}
+					if(line.charAt(i)== 'O') {
+						Coin coin = new Coin(i*PIXEL_SIZE, countLines*PIXEL_SIZE);
+						collidables.add(coin);
+					}
+					if(line.charAt(i)== '_') {
+						Barrier barrier = new Barrier(i*PIXEL_SIZE, countLines*PIXEL_SIZE);
+						collidables.add(barrier);
+					}
 				}
+				countLines++;
 			}
 			scanner.close();
 			if(countLines == 10) {

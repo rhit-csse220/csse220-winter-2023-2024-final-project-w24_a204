@@ -24,7 +24,6 @@ public class Obstacle extends Collidable{
 			g2.setColor(ELECTRIC_COLOR);
 		}else{
 			g2.setColor(NORMAL_COLOR);
-			System.out.println("normal color");
 		}
 		g2.fill(obstacle);
 	}
