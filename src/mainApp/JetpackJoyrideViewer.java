@@ -18,15 +18,15 @@ public class JetpackJoyrideViewer {
 	public void ScreenMain() {
 		JFrame frame = new JFrame();
 		frame.setTitle("Jetpack Joyride");
-		frame.setSize(1200, 500 + FRAME_BORDER);
+		frame.setSize(1200 + 14, 500 + FRAME_BORDER);
 		frame.setLocation(100, 100);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JetpackJoyrideComponent component = new JetpackJoyrideComponent();
 		try {
-		component.readFile("level/level1.txt");
+			component.readFile();
 		}catch(IllegalArgumentException e) {
 			System.err.println("Illegal File Input Exception");
-			System.err.println("File has to be 10x24");
+			System.err.println("File has to be 10x24 characters");
 		}
 		frame.add(component, BorderLayout.CENTER);
 		
