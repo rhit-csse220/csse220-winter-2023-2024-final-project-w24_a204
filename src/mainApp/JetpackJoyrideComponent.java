@@ -2,6 +2,8 @@ package mainApp;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -13,8 +15,9 @@ import javax.swing.JComponent;
 public class JetpackJoyrideComponent extends JComponent{
 	private static final int PIXEL_SIZE = 50;
 	private Player player = new Player(0, 0);
-	private ArrayList<Collidable> collidables = new ArrayList<Collidable>();
-
+	private ArrayList<Collidable> collidables = new ArrayList<Collidable>();	
+	
+	
 	public void AddPlayer() {
 		
 	}
@@ -31,7 +34,7 @@ public class JetpackJoyrideComponent extends JComponent{
 		int countLines = 0;
 		File file = new File(filename);
 		
-		
+				
 		try {
 			Scanner scanner = new Scanner(file);
 			while(scanner.hasNext()) {
@@ -76,6 +79,12 @@ public class JetpackJoyrideComponent extends JComponent{
 			e.printStackTrace();
 		}
 	}
+	
+	public void update() {
+		player.move();
+	}
+	
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -83,6 +92,28 @@ public class JetpackJoyrideComponent extends JComponent{
 		player.drawOn(g2);
 		for(Collidable c : collidables) {
 			c.drawOn(g2);
-		}
+		}		
+		addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getKeyCode() == 32) {
+					player.fly();
+				}
+			}
+		});
 	}
 }
