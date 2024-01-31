@@ -12,7 +12,7 @@ import javax.swing.JComponent;
 //hi
 public class JetpackJoyrideComponent extends JComponent{
 	private static final int PIXEL_SIZE = 50;
-	
+	private Player player = new Player(0, 0);
 	private ArrayList<Collidable> collidables = new ArrayList<Collidable>();
 
 	public void AddPlayer() {
@@ -58,6 +58,10 @@ public class JetpackJoyrideComponent extends JComponent{
 						Barrier barrier = new Barrier(i*PIXEL_SIZE, countLines*PIXEL_SIZE);
 						collidables.add(barrier);
 					}
+					if(line.charAt(i)== 'H') {
+						player.setxPos(i*PIXEL_SIZE);
+						player.setyPos(countLines*PIXEL_SIZE);
+					}
 				}
 				countLines++;
 			}
@@ -76,6 +80,7 @@ public class JetpackJoyrideComponent extends JComponent{
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
+		player.drawOn(g2);
 		for(Collidable c : collidables) {
 			c.drawOn(g2);
 		}
