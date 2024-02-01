@@ -21,6 +21,7 @@ public class JetpackJoyrideComponent extends JComponent {
 	private String filename = ("level/level1.txt");;
 	private int fileNum = 1;
 	private boolean keyIsPressed = false;
+//	private boolean exceptionThrown = false;
 
 	public void AddPlayer() {
 
@@ -75,7 +76,10 @@ public class JetpackJoyrideComponent extends JComponent {
 			if (countLines == 10) {
 				System.out.println("Success!");
 			} else {
-				throw new IllegalArgumentException();
+//				if (!exceptionThrown) {
+//					exceptionThrown = true;
+					throw new IllegalArgumentException();
+//				}
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("File Not Found: " + filename);
