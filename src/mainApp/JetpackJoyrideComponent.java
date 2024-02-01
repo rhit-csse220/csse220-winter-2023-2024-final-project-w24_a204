@@ -14,12 +14,8 @@ import javax.swing.JComponent;
 //hi
 public class JetpackJoyrideComponent extends JComponent {
 	private static final int PIXEL_SIZE = 50;
-	private static final int LEVEL_MAX = 2;
-	private static final int LEVEL_MIN = 1;
 	private Player player = new Player(0, 0);
 	private ArrayList<Collidable> collidables = new ArrayList<Collidable>();
-	private String filename = ("level/level1.txt");;
-	private int fileNum = 1;
 	private boolean keyIsPressed = false;
 
 	public void AddPlayer() {
@@ -34,7 +30,7 @@ public class JetpackJoyrideComponent extends JComponent {
 
 	}
 
-	public void readFile() {
+	public void readFile(String filename) {
 		int countLines = 0;
 		File file = new File(filename);
 
@@ -89,6 +85,14 @@ public class JetpackJoyrideComponent extends JComponent {
 			player.fly();
 		}
 	}
+	
+	public ArrayList<Collidable> getCollidables() {
+		return collidables;
+	}
+	
+	public void setKeyPressed(boolean pressed) {
+		keyIsPressed = pressed;
+	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -98,50 +102,5 @@ public class JetpackJoyrideComponent extends JComponent {
 		for (Collidable c : collidables) {
 			c.drawOn(g2);
 		}
-		addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				if (e.getKeyChar() == 'u') {
-					if (fileNum < LEVEL_MAX) {
-						fileNum++;
-						filename = ("level/level" + fileNum + ".txt");
-					}
-				} else if (e.getKeyChar() == 'd') {
-					if (fileNum > LEVEL_MIN) {
-						fileNum--;
-						filename = ("level/level" + fileNum + ".txt");
-					}
-				}
-				if (e.getKeyChar() == 'u' || e.getKeyChar() == 'd') {
-					try {
-						collidables.clear();
-						readFile();
-					} catch (IllegalArgumentException r) {
-						System.err.println("Illegal File Input Exception");
-						System.err.println("File has to be 10x24 characters");
-						System.err.println("Moving to empty level");
-						collidables.clear();
-					}
-				}
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				if (e.getKeyCode() == 32) {
-					keyIsPressed = false;
-				}
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-				if (e.getKeyCode() == 32) {
-					keyIsPressed = true;
-				}
-			}
-		});
 	}
 }
