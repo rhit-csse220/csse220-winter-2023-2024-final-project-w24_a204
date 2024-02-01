@@ -20,6 +20,7 @@ public class JetpackJoyrideComponent extends JComponent {
 	private ArrayList<Collidable> collidables = new ArrayList<Collidable>();
 	private String filename = ("level/level1.txt");;
 	private int fileNum = 1;
+	private boolean keyIsPressed = false;
 
 	public void AddPlayer() {
 
@@ -84,6 +85,9 @@ public class JetpackJoyrideComponent extends JComponent {
 
 	public void update() {
 		player.move();
+		if(keyIsPressed) {
+			player.fly();
+		}
 	}
 
 	@Override
@@ -126,14 +130,16 @@ public class JetpackJoyrideComponent extends JComponent {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				// TODO Auto-generated method stub
-
+				if (e.getKeyCode() == 32) {
+					keyIsPressed = false;
+				}
 			}
 
 			@Override
 			public void keyPressed(KeyEvent e) {
 				// TODO Auto-generated method stub
 				if (e.getKeyCode() == 32) {
-					player.fly();
+					keyIsPressed = true;
 				}
 			}
 		});
