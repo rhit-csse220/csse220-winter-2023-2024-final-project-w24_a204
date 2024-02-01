@@ -17,7 +17,6 @@ public class JetpackJoyrideComponent extends JComponent {
 	private Player player = new Player(0, 0);
 	private ArrayList<Collidable> collidables = new ArrayList<Collidable>();
 	private boolean keyIsPressed = false;
-//	private boolean exceptionThrown = false;
 
 	public void AddPlayer() {
 
@@ -72,10 +71,7 @@ public class JetpackJoyrideComponent extends JComponent {
 			if (countLines == 10) {
 				System.out.println("Success!");
 			} else {
-//				if (!exceptionThrown) {
-//					exceptionThrown = true;
-					throw new IllegalArgumentException();
-//				}
+				throw new IllegalArgumentException();
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("File Not Found: " + filename);
