@@ -22,12 +22,13 @@ public class Player {
 	}
 	
 	public void fly() {
-		yVelocity = .1;
-		yPos -= yVelocity;
+		yVelocity = 5;
 		
 	}
 	
 	public void move() {
+		yPos -= yVelocity;
+		yVelocity = 0;
 		xPos += X_VELOCITY;
 		
 	}
