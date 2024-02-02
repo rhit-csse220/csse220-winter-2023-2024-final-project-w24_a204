@@ -14,8 +14,16 @@ import javax.swing.JComponent;
 //hi
 public class JetpackJoyrideComponent extends JComponent {
 	private static final int PIXEL_SIZE = 50;
+	private static final double MISSILE_SPAWN_PERCENTAGE_CHANCE = 1;
+//	private static final int NORMAL_DELAY_COUNTDOWN = 1000;
+//	private static final int HOMING_DELAY_COUNTDOWN = 250;
+	private static final int OF_SCREEN = -50;
+	private static final int RIGHT_SIDE_SCREEN = 1200;
 	private Player player = new Player(0, 0);
 	private ArrayList<Collidable> collidables = new ArrayList<Collidable>();
+	private Missile normalMissile = new Missile(false);
+	private Missile homingMissile = new Missile(true);
+	private boolean emergencyShot = true;
 	private boolean keyIsPressed = false;
 
 	public void AddPlayer() {
@@ -70,6 +78,8 @@ public class JetpackJoyrideComponent extends JComponent {
 			scanner.close();
 			if (countLines == 10) {
 				System.out.println("Success!");
+				normalMissile.setxPos(OF_SCREEN);
+				homingMissile.setxPos(OF_SCREEN);
 			} else {
 				throw new IllegalArgumentException();
 			}
@@ -83,7 +93,34 @@ public class JetpackJoyrideComponent extends JComponent {
 		player.move();
 		if(keyIsPressed) {
 			player.fly();
+		}else {
+			player.fall();
 		}
+		if(Math.random() < MISSILE_SPAWN_PERCENTAGE_CHANCE/100 && normalMissile.getxPos() <= -50) {
+			normalMissile.setxPos(RIGHT_SIDE_SCREEN);
+//			normalMissile.setDelay(NORMAL_DELAY_COUNTDOWN);
+		}
+		if(Math.random() < MISSILE_SPAWN_PERCENTAGE_CHANCE/100 && homingMissile.getxPos() <= -50) {
+			homingMissile.setxPos(RIGHT_SIDE_SCREEN);
+//			homingMissile.setDelay(HOMING_DELAY_COUNTDOWN);
+		}
+		if(emergencyShot && homingMissile.getxPos() <= -50 && normalMissile.getxPos() <= -50
+				&& player.getxPos() > 600) {
+			normalMissile.setxPos(RIGHT_SIDE_SCREEN);
+			homingMissile.setxPos(RIGHT_SIDE_SCREEN);
+			emergencyShot = false;
+		}else if(emergencyShot && homingMissile.getxPos() <= -50 && player.getxPos() > 600) {
+			homingMissile.setxPos(RIGHT_SIDE_SCREEN);
+			emergencyShot = false;
+		}else if(emergencyShot && normalMissile.getxPos() <= -50 && player.getxPos() > 600) {
+			normalMissile.setxPos(RIGHT_SIDE_SCREEN);
+			emergencyShot = false;
+		}
+//		normalMissile.delayCountdown();
+		normalMissile.move();
+//		homingMissile.delayCountdown();
+		homingMissile.move();
+		homingMissile.homesIn(player.getxPos(), player.getyPos());
 	}
 	
 	public ArrayList<Collidable> getCollidables() {
@@ -102,5 +139,7 @@ public class JetpackJoyrideComponent extends JComponent {
 		for (Collidable c : collidables) {
 			c.drawOn(g2);
 		}
+		normalMissile.drawOn(g2);
+		homingMissile.drawOn(g2);
 	}
 }

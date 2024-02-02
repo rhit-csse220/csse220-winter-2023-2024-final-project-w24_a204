@@ -4,8 +4,8 @@ import java.awt.Graphics;
 
 public abstract class Collidable {
 	
-	protected int xPos;
-	protected int yPos;
+	protected double xPos;
+	protected double yPos;
 	
 	public Collidable(int xPos, int yPos) {
 		this.xPos = xPos;

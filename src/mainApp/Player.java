@@ -15,16 +15,20 @@ public class Player {
 	private double yVelocity = 0;
 	private static final double X_VELOCITY = 5;
 	
-	public Player(int xPos, int yPos) {
+	public Player(double xPos, double yPos) {
 		this.setxPos(xPos);
 		this.setyPos(yPos);
 		
 	}
 	
 	public void fly() {
-		yVelocity = 5;
+		yVelocity = 9;
 		yPos -= yVelocity;
-		
+	}
+	
+	public void fall() {
+		yVelocity = -9;
+		yPos -= yVelocity;
 	}
 	
 	public void move() {
@@ -35,6 +39,8 @@ public class Player {
 		Graphics2D g2 = (Graphics2D) g;
 		if(yPos<50) {
 			yPos = 50;
+		}else if(yPos > 400) {
+			yPos = 400;
 		}
 		if(xPos>1150) {
 			xPos = 1150;
@@ -49,7 +55,7 @@ public class Player {
 		return xPos;
 	}
 
-	public void setxPos(int xPos) {
+	public void setxPos(double xPos) {
 		this.xPos = xPos;
 	}
 
@@ -57,7 +63,7 @@ public class Player {
 		return yPos;
 	}
 
-	public void setyPos(int yPos) {
+	public void setyPos(double yPos) {
 		this.yPos = yPos;
 	}
 }
