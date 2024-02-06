@@ -29,9 +29,11 @@ public class JetpackJoyrideViewer {
 		JetpackJoyrideComponent component = new JetpackJoyrideComponent();
 		try {
 			component.readFile("level/level1.txt");
-		}catch(IllegalArgumentException e) {
-			System.err.println("Illegal File Input Exception");
-			System.err.println("File has to be 10x24 characters");
+		}catch(InvalidLevelFormatException e) {
+			System.err.println(e.getMessage());
+			System.err.println("Moving to empty level");
+			component.getCollidables().clear(); 
+			
 		}
 		component.addKeyListener(new KeyListener() {
 
@@ -54,9 +56,8 @@ public class JetpackJoyrideViewer {
 					try {
 						component.getCollidables().clear();
 						component.readFile(filename);
-					} catch (IllegalArgumentException r) {
-						System.err.println("Illegal File Input Exception");
-						System.err.println("File has to be 10x24 characters");
+					} catch (InvalidLevelFormatException r) {
+						System.err.println(r.getMessage());
 						System.err.println("Moving to empty level");
 						component.getCollidables().clear();
 					}

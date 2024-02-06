@@ -38,7 +38,7 @@ public class JetpackJoyrideComponent extends JComponent {
 
 	}
 
-	public void readFile(String filename) {
+	public void readFile(String filename) throws InvalidLevelFormatException {
 		int countLines = 0;
 		File file = new File(filename);
 
@@ -81,7 +81,7 @@ public class JetpackJoyrideComponent extends JComponent {
 				normalMissile.setxPos(OF_SCREEN);
 				homingMissile.setxPos(OF_SCREEN);
 			} else {
-				throw new IllegalArgumentException();
+				throw new InvalidLevelFormatException();
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("File Not Found: " + filename);
