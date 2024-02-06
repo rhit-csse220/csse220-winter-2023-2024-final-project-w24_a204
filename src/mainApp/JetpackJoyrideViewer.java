@@ -15,15 +15,18 @@ import javax.swing.Timer;
 //hi
 public class JetpackJoyrideViewer {
 	
-	private static final int FRAME_BORDER = 37;
+	private static final int VERTICAL_FRAME_BORDER = 37;
+	private static final int HORIZONTAL_FRAME_BORDER = 14;
 	private static final int LEVEL_MAX = 2;
 	private static final int LEVEL_MIN = 1;
+	private static final int DELAY = 50;
 	private int fileNum = 1;
+	private boolean gameOver = false;
 	
 	public void ScreenMain() {
 		JFrame frame = new JFrame();
 		frame.setTitle("Jetpack Joyride");
-		frame.setSize(1200 + 14, 500 + FRAME_BORDER);
+		frame.setSize(1200 + HORIZONTAL_FRAME_BORDER, 500 + VERTICAL_FRAME_BORDER);
 		frame.setLocation(100, 100);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JetpackJoyrideComponent component = new JetpackJoyrideComponent();
@@ -82,14 +85,19 @@ public class JetpackJoyrideViewer {
 		});
 		frame.add(component, BorderLayout.CENTER);
 		
-		Timer t = new Timer(50, new ActionListener() {
+		Timer t = new Timer(DELAY, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				component.repaint();
-				frame.repaint();
-				component.grabFocus();
-				component.update();
+				if(gameOver) {
+					
+				}else {
+					component.repaint();
+					frame.repaint();
+					component.grabFocus();
+					component.update();
+					gameOver = component.checkGameOver();
+				}
 			}
 			
 		});

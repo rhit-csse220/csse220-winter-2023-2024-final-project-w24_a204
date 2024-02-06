@@ -12,8 +12,7 @@ public class MainApp {
 	
 	
 	private void runApp() {
-		System.out.println("Write your cool arcade game here!");	
-		System.out.println("e");
+		System.out.println("Jetpack Joyride!");
 	} // runApp
 
 	/**
@@ -24,7 +23,7 @@ public class MainApp {
 		MainApp mainApp = new MainApp();
 		JetpackJoyrideViewer viewer = new JetpackJoyrideViewer();
 		viewer.ScreenMain();
-		mainApp.runApp();		
+		mainApp.runApp();
 	} // main
 
 }

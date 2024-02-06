@@ -13,7 +13,7 @@ public class Missile extends Collidable {
 	private double velocity;
 
 	public Missile(boolean homing) {
-		super(1200, (int) (450 * Math.random() + 50));
+		super(1200, (int) (450 * Math.random() + EDGE_LENGTH));
 		this.homing = homing;
 		if (homing) {
 			velocity = 4;

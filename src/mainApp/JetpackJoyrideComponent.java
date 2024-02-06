@@ -17,8 +17,11 @@ public class JetpackJoyrideComponent extends JComponent {
 	private static final double MISSILE_SPAWN_PERCENTAGE_CHANCE = 1;
 //	private static final int NORMAL_DELAY_COUNTDOWN = 1000;
 //	private static final int HOMING_DELAY_COUNTDOWN = 250;
+	private static final int TEXT_HEIGHT = 10;
+	private static final int TEXT_WIDTH = 24;
 	private static final int OF_SCREEN = -50;
 	private static final int RIGHT_SIDE_SCREEN = 1200;
+	private static final int BOTTOM_OF_SCREEN = 600;
 	private Player player = new Player(0, 0);
 	private ArrayList<Collidable> collidables = new ArrayList<Collidable>();
 	private Missile normalMissile = new Missile(false);
@@ -46,8 +49,8 @@ public class JetpackJoyrideComponent extends JComponent {
 			Scanner scanner = new Scanner(file);
 			while (scanner.hasNext()) {
 				String line = scanner.nextLine();
-				if (line.length() != 24) {
-					countLines = 11;
+				if (line.length() != TEXT_WIDTH) {
+					countLines = TEXT_HEIGHT + 1;
 					break;
 				}
 
@@ -76,8 +79,7 @@ public class JetpackJoyrideComponent extends JComponent {
 				countLines++;
 			}
 			scanner.close();
-			if (countLines == 10) {
-				System.out.println("Success!");
+			if (countLines == TEXT_HEIGHT) {
 				normalMissile.setxPos(OF_SCREEN);
 				homingMissile.setxPos(OF_SCREEN);
 			} else {
@@ -96,23 +98,23 @@ public class JetpackJoyrideComponent extends JComponent {
 		}else {
 			player.fall();
 		}
-		if(Math.random() < MISSILE_SPAWN_PERCENTAGE_CHANCE/100 && normalMissile.getxPos() <= -50) {
+		if(Math.random() < MISSILE_SPAWN_PERCENTAGE_CHANCE/100 && normalMissile.getxPos() <= OF_SCREEN) {
 			normalMissile.setxPos(RIGHT_SIDE_SCREEN);
 //			normalMissile.setDelay(NORMAL_DELAY_COUNTDOWN);
 		}
-		if(Math.random() < MISSILE_SPAWN_PERCENTAGE_CHANCE/100 && homingMissile.getxPos() <= -50) {
+		if(Math.random() < MISSILE_SPAWN_PERCENTAGE_CHANCE/100 && homingMissile.getxPos() <= OF_SCREEN) {
 			homingMissile.setxPos(RIGHT_SIDE_SCREEN);
 //			homingMissile.setDelay(HOMING_DELAY_COUNTDOWN);
 		}
-		if(emergencyShot && homingMissile.getxPos() <= -50 && normalMissile.getxPos() <= -50
-				&& player.getxPos() > 600) {
+		if(emergencyShot && homingMissile.getxPos() <= OF_SCREEN && normalMissile.getxPos() <= OF_SCREEN
+				&& player.getxPos() > BOTTOM_OF_SCREEN) {
 			normalMissile.setxPos(RIGHT_SIDE_SCREEN);
 			homingMissile.setxPos(RIGHT_SIDE_SCREEN);
 			emergencyShot = false;
-		}else if(emergencyShot && homingMissile.getxPos() <= -50 && player.getxPos() > 600) {
+		}else if(emergencyShot && homingMissile.getxPos() <= OF_SCREEN && player.getxPos() > BOTTOM_OF_SCREEN) {
 			homingMissile.setxPos(RIGHT_SIDE_SCREEN);
 			emergencyShot = false;
-		}else if(emergencyShot && normalMissile.getxPos() <= -50 && player.getxPos() > 600) {
+		}else if(emergencyShot && normalMissile.getxPos() <= OF_SCREEN && player.getxPos() > BOTTOM_OF_SCREEN) {
 			normalMissile.setxPos(RIGHT_SIDE_SCREEN);
 			emergencyShot = false;
 		}
@@ -129,6 +131,10 @@ public class JetpackJoyrideComponent extends JComponent {
 	
 	public void setKeyPressed(boolean pressed) {
 		keyIsPressed = pressed;
+	}
+	
+	public boolean checkGameOver(){
+		return (player.getLives() == 0);
 	}
 
 	@Override
