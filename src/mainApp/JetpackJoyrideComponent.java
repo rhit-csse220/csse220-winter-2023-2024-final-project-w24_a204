@@ -19,11 +19,12 @@ public class JetpackJoyrideComponent extends JComponent {
 //	private static final int HOMING_DELAY_COUNTDOWN = 250;
 	private static final int TEXT_HEIGHT = 10;
 	private static final int TEXT_WIDTH = 24;
-	private static final int OF_SCREEN = -50;
+	private static final int OF_SCREEN = -50; 
 	private static final int RIGHT_SIDE_SCREEN = 1200;
 	private static final int BOTTOM_OF_SCREEN = 600;
 	private Player player = new Player(0, 0);
-	private ArrayList<Collidable> collidables = new ArrayList<Collidable>();
+	private ArrayList<Collidable> collidablesToAdd = new ArrayList<Collidable>();
+	private ArrayList<Collidable> collidablesToRemove = new ArrayList<Collidable>();
 	private Missile normalMissile = new Missile(false);
 	private Missile homingMissile = new Missile(true);
 	private boolean emergencyShot = true;
@@ -57,19 +58,19 @@ public class JetpackJoyrideComponent extends JComponent {
 				for (int i = 0; i < line.length(); i++) {
 					if (line.charAt(i) == 'B') {
 						Obstacle obstacle = new Obstacle(i * PIXEL_SIZE, countLines * PIXEL_SIZE, false);
-						collidables.add(obstacle);
+						collidablesToAdd.add(obstacle);
 					}
 					if (line.charAt(i) == 'X') {
 						Obstacle obstacle = new Obstacle(i * PIXEL_SIZE, countLines * PIXEL_SIZE, true);
-						collidables.add(obstacle);
+						collidablesToAdd.add(obstacle);
 					}
 					if (line.charAt(i) == 'O') {
 						Coin coin = new Coin(i * PIXEL_SIZE, countLines * PIXEL_SIZE);
-						collidables.add(coin);
+						collidablesToAdd.add(coin);
 					}
 					if (line.charAt(i) == '_') {
 						Barrier barrier = new Barrier(i * PIXEL_SIZE, countLines * PIXEL_SIZE);
-						collidables.add(barrier);
+						collidablesToAdd.add(barrier);
 					}
 					if (line.charAt(i) == 'H') {
 						player.setxPos(i * PIXEL_SIZE);
@@ -125,8 +126,9 @@ public class JetpackJoyrideComponent extends JComponent {
 		homingMissile.homesIn(player.getxPos(), player.getyPos());
 	}
 	
+	
 	public ArrayList<Collidable> getCollidables() {
-		return collidables;
+		return collidablesToAdd;
 	}
 	
 	public void setKeyPressed(boolean pressed) {
@@ -142,7 +144,7 @@ public class JetpackJoyrideComponent extends JComponent {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		player.drawOn(g2);
-		for (Collidable c : collidables) {
+		for (Collidable c : collidablesToAdd) {
 			c.drawOn(g2);
 		}
 		normalMissile.drawOn(g2);
