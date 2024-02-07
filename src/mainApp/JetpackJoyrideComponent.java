@@ -30,9 +30,16 @@ public class JetpackJoyrideComponent extends JComponent {
 	private boolean emergencyShot = true;
 	private boolean keyIsPressed = false;
 	private String currentLevel;
+	private int currentLevelNum;
 
-	public void readFile(String filename) throws InvalidLevelFormatException {
+	public void readFile(String filename, int fileNum) throws InvalidLevelFormatException {
+		
+		//The fileNum argument is intended to be used down the road when we
+		//make the missiles spawn based on what level is being played, i.e.
+		//on level one no missiles will spawn, on level two, the regular one will
+		
 		currentLevel = filename;
+		currentLevelNum = fileNum;
 		int countLines = 0;
 		File file = new File(filename);
 
@@ -102,12 +109,16 @@ public class JetpackJoyrideComponent extends JComponent {
 	
 	private void handleMissile() {
 		if (Math.random() < MISSILE_SPAWN_PERCENTAGE_CHANCE / 100 && normalMissile.getxPos() <= OFF_SCREEN) {
-			normalMissile.setxPos(RIGHT_SIDE_SCREEN);
-//			normalMissile.setDelay(NORMAL_DELAY_COUNTDOWN);
+//			if(currentLevelNum > 1) {
+				normalMissile.setxPos(RIGHT_SIDE_SCREEN);
+//				normalMissile.setDelay(NORMAL_DELAY_COUNTDOWN);
+//			}
 		}
 		if (Math.random() < MISSILE_SPAWN_PERCENTAGE_CHANCE / 100 && homingMissile.getxPos() <= OFF_SCREEN) {
-			homingMissile.setxPos(RIGHT_SIDE_SCREEN);
-//			homingMissile.setDelay(HOMING_DELAY_COUNTDOWN);
+//			if(currentLevelNum > 2) {
+				homingMissile.setxPos(RIGHT_SIDE_SCREEN);
+//				homingMissile.setDelay(HOMING_DELAY_COUNTDOWN);
+//			}
 		}
 		if (emergencyShot && homingMissile.getxPos() <= OFF_SCREEN && normalMissile.getxPos() <= OFF_SCREEN
 				&& player.getxPos() > MIDDLE_OF_SCREEN) {
@@ -171,7 +182,7 @@ public class JetpackJoyrideComponent extends JComponent {
 	private void handleLevelReset() {
 		collidablesToAdd.clear();
 		try {
-			readFile(currentLevel);
+			readFile(currentLevel, currentLevelNum);
 		} catch (InvalidLevelFormatException e) {
 			System.err.println(e.getMessage());
 			System.err.println("Moving to empty level");

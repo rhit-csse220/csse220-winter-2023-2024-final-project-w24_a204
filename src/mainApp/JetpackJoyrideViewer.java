@@ -31,7 +31,7 @@ public class JetpackJoyrideViewer {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JetpackJoyrideComponent component = new JetpackJoyrideComponent();
 		try {
-			component.readFile("level/level1.txt");
+			component.readFile("level/level1.txt", 1);
 		}catch(InvalidLevelFormatException e) {
 			System.err.println(e.getMessage());
 			System.err.println("Moving to empty level");
@@ -58,7 +58,7 @@ public class JetpackJoyrideViewer {
 				if (e.getKeyChar() == 'u' || e.getKeyChar() == 'd') {
 					try {
 						component.getCollidables().clear();
-						component.readFile(filename);
+						component.readFile(filename, fileNum);
 					} catch (InvalidLevelFormatException r) {
 						System.err.println(r.getMessage());
 						System.err.println("Moving to empty level");

@@ -47,10 +47,14 @@ public class Obstacle extends Collidable{
 		if(electric) {
 			p.loseLife();
 		}else {
-			if(p.getyPos() < 50) {
-				p.setyPos(50);
-			}else if(p.getyPos() > 400) {
-				p.setyPos(400);
+			if(p.getxPos() + 45 != this.xPos) {
+				if(p.getyPos() < this.yPos && p.getyPos() > this.yPos-50) {
+					p.setyPos(this.yPos-50);
+				}else if(p.getyPos() < this.yPos+50 && p.getyPos() > this.yPos) {
+					p.setyPos(this.yPos+50);
+				}
+			}else{
+				p.setxPos(this.xPos-50);
 			}
 		}
 	}
