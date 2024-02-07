@@ -22,10 +22,37 @@ public class Obstacle extends Collidable{
 		Rectangle2D.Double obstacle = new Rectangle2D.Double(xPos, yPos, EDGE_LENGTH, EDGE_LENGTH);
 		if(electric) {
 			g2.setColor(ELECTRIC_COLOR);
+			this.setDamageTrue();
 		}else{
 			g2.setColor(NORMAL_COLOR);
 		}
 		g2.fill(obstacle);
+	}
+
+	@Override
+	protected double getHeight() {
+		// TODO Auto-generated method stub
+		return EDGE_LENGTH;
+	}
+
+	@Override
+	protected double getWidth() {
+		// TODO Auto-generated method stub
+		return EDGE_LENGTH;
+	}
+
+	@Override
+	protected void collideWith(Player p) {
+		// TODO Auto-generated method stub
+		if(electric) {
+			p.loseLife();
+		}else {
+			if(p.getyPos() < 50) {
+				p.setyPos(50);
+			}else if(p.getyPos() > 400) {
+				p.setyPos(400);
+			}
+		}
 	}
 	
 }

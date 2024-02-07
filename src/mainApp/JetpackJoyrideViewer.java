@@ -90,7 +90,7 @@ public class JetpackJoyrideViewer {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(gameOver) {
-					
+					//currently pauses the game indefinitely
 				}else {
 					component.repaint();
 					frame.repaint();

@@ -40,18 +40,17 @@ public class Player {
 	
 	public void drawOn(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		if(yPos < 50) {
-			yPos = 50;
-		}else if(yPos > 400) {
-			yPos = 400;
-		}
-		if(xPos > 1150) {
-			xPos = 1150;
+		if(this.xPos > 1150) {
+			this.xPos = 1150;
 		}
 		Rectangle2D.Double player = new Rectangle2D.Double(getxPos(), getyPos(), EDGE_LENGTH, EDGE_LENGTH);
 		g2.setColor(COLOR);
 		g2.fill(player);
 
+	}
+	
+	public Rectangle2D.Double getBoundingBox() {
+		return new Rectangle2D.Double(this.xPos, this.yPos, EDGE_LENGTH, EDGE_LENGTH);
 	}
 
 	public double getxPos() {

@@ -38,6 +38,7 @@ public class Missile extends Collidable {
 		Rectangle2D.Double missile = new Rectangle2D.Double(getxPos(), getyPos(), EDGE_LENGTH, EDGE_LENGTH);
 		g2.setColor(COLOR);
 		g2.fill(missile);
+		this.setDamageTrue();
 	}
 
 	public void homesIn(double otherXPos, double otherYPos) {
@@ -88,5 +89,23 @@ public class Missile extends Collidable {
 
 	public void setyPos(int yPos) {
 		this.yPos = yPos;
+	}
+
+	@Override
+	protected double getHeight() {
+		// TODO Auto-generated method stub
+		return EDGE_LENGTH;
+	}
+
+	@Override
+	protected double getWidth() {
+		// TODO Auto-generated method stub
+		return EDGE_LENGTH;
+	}
+
+	@Override
+	protected void collideWith(Player p) {
+		// TODO Auto-generated method stub
+		p.loseLife();
 	}
 }

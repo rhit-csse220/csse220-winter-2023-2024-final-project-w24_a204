@@ -24,4 +24,26 @@ public class Barrier extends Collidable {
 
 	}
 
+	@Override
+	protected double getHeight() {
+		// TODO Auto-generated method stub
+		return EDGE_LENGTH;
+	}
+
+	@Override
+	protected double getWidth() {
+		// TODO Auto-generated method stub
+		return EDGE_LENGTH;
+	}
+
+	@Override
+	protected void collideWith(Player p) {
+		// TODO Auto-generated method stub
+		if(p.getyPos() < 50) {
+			p.setyPos(50);
+		}else if(p.getyPos() > 400) {
+			p.setyPos(400);
+		}
+	}
+
 }
