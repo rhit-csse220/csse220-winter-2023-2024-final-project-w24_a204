@@ -1,6 +1,7 @@
 package mainApp;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -10,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.Timer;
 
 //hi
@@ -22,6 +24,8 @@ public class JetpackJoyrideViewer {
 	private static final int DELAY = 50;
 	private int fileNum = 1;
 	private boolean gameOver = false;
+	private int coinCount = 0;
+	private int lifeCount;
 	
 	public void ScreenMain() {
 		JFrame frame = new JFrame();
@@ -30,6 +34,10 @@ public class JetpackJoyrideViewer {
 		frame.setLocation(100, 100);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JetpackJoyrideComponent component = new JetpackJoyrideComponent();
+		JLabel label = new JLabel("Coins: " + coinCount);
+		JLabel labelLife = new JLabel();
+		label.setFont(new Font(null, Font.PLAIN, 30));
+		labelLife.setFont(new Font(null, Font.PLAIN, 30));
 		try {
 			component.readFile("level/level1.txt", 1);
 		}catch(InvalidLevelFormatException e) {
@@ -83,6 +91,8 @@ public class JetpackJoyrideViewer {
 				}
 			}
 		});
+		frame.add(label);
+		frame.add(labelLife);
 		frame.add(component, BorderLayout.CENTER);
 		
 		Timer t = new Timer(DELAY, new ActionListener() {
@@ -91,13 +101,31 @@ public class JetpackJoyrideViewer {
 			public void actionPerformed(ActionEvent e) {
 				if(gameOver) {
 					//currently pauses the game indefinitely
+					component.getCollidables().clear();
+					try {
+						component.readFile("level/gameOver.txt", 1);
+						label.setFont(new Font(null, Font.PLAIN, 20));
+						label.setBounds(5, 0, 140, 50);
+						labelLife.setText("");
+					} catch (InvalidLevelFormatException r) {
+						System.err.println(r.getMessage());
+						System.err.println("Moving to empty level");
+						component.getCollidables().clear();
+					}
 				}else {
-					component.repaint();
-					frame.repaint();
 					component.grabFocus();
-					component.update();
 					gameOver = component.checkGameOver();
+					label.setBounds(5, 50, 140, 50);
+					labelLife.setBounds(5, 100, 140, 50);
+					labelLife.setText("Lives: " + component.checkLives());
 				}
+				component.repaint();
+				frame.repaint();
+				label.setText("Coins: " + coinCount);
+				label.repaint();
+				labelLife.repaint();
+				component.update();
+				coinCount = component.checkCoins();
 			}
 			
 		});

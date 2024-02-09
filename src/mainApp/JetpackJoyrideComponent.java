@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 import javax.swing.JComponent;
 
-
 //hi
 public class JetpackJoyrideComponent extends JComponent {
 	private static final int PIXEL_SIZE = 50;
@@ -33,11 +32,11 @@ public class JetpackJoyrideComponent extends JComponent {
 	private int currentLevelNum;
 
 	public void readFile(String filename, int fileNum) throws InvalidLevelFormatException {
-		
-		//The fileNum argument is intended to be used down the road when we
-		//make the missiles spawn based on what level is being played, i.e.
-		//on level one no missiles will spawn, on level two, the regular one will
-		
+
+		// The fileNum argument is intended to be used down the road when we
+		// make the missiles spawn based on what level is being played, i.e.
+		// on level one no missiles will spawn, on level two, the regular one will
+
 		currentLevel = filename;
 		currentLevelNum = fileNum;
 		int countLines = 0;
@@ -90,9 +89,13 @@ public class JetpackJoyrideComponent extends JComponent {
 	}
 
 	public void update() {
-		handlePlayer();
-		handleMissile();
-		handleCollisions();
+		if (player.getLives() > 0) {
+			handlePlayer();
+			handleMissile();
+			handleCollisions();
+		} else {
+			handlePlayer();
+		}
 	}
 
 	public ArrayList<Collidable> getCollidables() {
@@ -106,17 +109,17 @@ public class JetpackJoyrideComponent extends JComponent {
 	public boolean checkGameOver() {
 		return (player.getLives() == 0);
 	}
-	
+
 	private void handleMissile() {
 		if (Math.random() < MISSILE_SPAWN_PERCENTAGE_CHANCE / 100 && normalMissile.getxPos() <= OFF_SCREEN) {
 //			if(currentLevelNum > 1) {
-				normalMissile.setxPos(RIGHT_SIDE_SCREEN);
+			normalMissile.setxPos(RIGHT_SIDE_SCREEN);
 //				normalMissile.setDelay(NORMAL_DELAY_COUNTDOWN);
 //			}
 		}
 		if (Math.random() < MISSILE_SPAWN_PERCENTAGE_CHANCE / 100 && homingMissile.getxPos() <= OFF_SCREEN) {
 //			if(currentLevelNum > 2) {
-				homingMissile.setxPos(RIGHT_SIDE_SCREEN);
+			homingMissile.setxPos(RIGHT_SIDE_SCREEN);
 //				homingMissile.setDelay(HOMING_DELAY_COUNTDOWN);
 //			}
 		}
@@ -132,7 +135,7 @@ public class JetpackJoyrideComponent extends JComponent {
 			normalMissile.setxPos(RIGHT_SIDE_SCREEN);
 			emergencyShot = false;
 		}
-		if(collidablesToAdd.size() == 0) {
+		if (collidablesToAdd.size() == 0) {
 			normalMissile.setxPos(OFF_SCREEN);
 			homingMissile.setxPos(OFF_SCREEN);
 		}
@@ -149,11 +152,11 @@ public class JetpackJoyrideComponent extends JComponent {
 			if (!c.shouldRemove() && c.overlaps(player) && c.doesGetterDamage()) {
 				c.collideWith(player);
 				tookDamage = true;
-			}else if (!c.shouldRemove() && c.overlaps(player)) {
+			} else if (!c.shouldRemove() && c.overlaps(player)) {
 				c.collideWith(player);
 			}
 		}
-		
+
 		if (homingMissile.overlaps(player)) {
 			homingMissile.collideWith(player);
 			handleLevelReset();
@@ -162,23 +165,23 @@ public class JetpackJoyrideComponent extends JComponent {
 			normalMissile.collideWith(player);
 			handleLevelReset();
 		}
-		if(tookDamage) {
+		if (tookDamage) {
 			handleLevelReset();
 		}
 
 		ArrayList<Collidable> collidablesToRemove = new ArrayList<Collidable>();
-		
-		for(Collidable object: collidablesToAdd){
-			if(object.shouldRemove()){
+
+		for (Collidable object : collidablesToAdd) {
+			if (object.shouldRemove()) {
 				collidablesToRemove.add(object);
 			}
 		}
-		
-		for(Collidable object: collidablesToRemove){
+
+		for (Collidable object : collidablesToRemove) {
 			this.collidablesToAdd.remove(object);
 		}
 	}
-	
+
 	private void handleLevelReset() {
 		collidablesToAdd.clear();
 		try {
@@ -186,18 +189,30 @@ public class JetpackJoyrideComponent extends JComponent {
 		} catch (InvalidLevelFormatException e) {
 			System.err.println(e.getMessage());
 			System.err.println("Moving to empty level");
-			collidablesToAdd.clear(); 
+			collidablesToAdd.clear();
 		}
-		
+
+	}
+
+	private void handlePlayer() {
+		if (player.getLives() > 0) {
+			player.move();
+			if (keyIsPressed) {
+				player.fly();
+			} else {
+				player.fall();
+			}
+		} else {
+			player.setxPos(-50);
+		}
 	}
 	
-	private void handlePlayer() {
-		player.move();
-		if (keyIsPressed) {
-			player.fly();
-		} else {
-			player.fall();
-		}
+	public int checkCoins() {
+		return player.getCoins();
+	}
+	
+	public int checkLives() {
+		return player.getLives();
 	}
 
 	@Override
