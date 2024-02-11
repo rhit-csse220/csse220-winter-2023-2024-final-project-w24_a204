@@ -39,7 +39,7 @@ public class JetpackJoyrideViewer {
 		label.setFont(new Font(null, Font.PLAIN, 30));
 		labelLife.setFont(new Font(null, Font.PLAIN, 30));
 		try {
-			component.readFile("level/level1.txt", 1);
+			component.readFile("level/level1.txt", fileNum);
 		}catch(InvalidLevelFormatException e) {
 			System.err.println(e.getMessage());
 			System.err.println("Moving to empty level");

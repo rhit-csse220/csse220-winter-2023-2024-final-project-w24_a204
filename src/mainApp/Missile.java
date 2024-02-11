@@ -6,7 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
 public class Missile extends Collidable {
-	private static final Color COLOR = Color.ORANGE;
+	private static final Color NORMAL_COLOR = Color.ORANGE;
+	private static final Color HOMING_COLOR = new Color(255,152,0);
 	private static final int EDGE_LENGTH = 50;
 //	private int delay;
 	private boolean homing = false;
@@ -36,7 +37,11 @@ public class Missile extends Collidable {
 			xPos = 1150;
 		}
 		Rectangle2D.Double missile = new Rectangle2D.Double(getxPos(), getyPos(), EDGE_LENGTH, EDGE_LENGTH);
-		g2.setColor(COLOR);
+		if(homing) {
+			g2.setColor(HOMING_COLOR);
+		}else {
+			g2.setColor(NORMAL_COLOR);
+		}
 		g2.fill(missile);
 		this.setDamageTrue();
 	}
