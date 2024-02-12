@@ -27,6 +27,7 @@ public class Missile extends Collidable {
 	@Override
 	public void drawOn(Graphics g) {
 		// TODO Auto-generated method stub
+		
 		Graphics2D g2 = (Graphics2D) g;
 		if (yPos < 50) {
 			yPos = 50;

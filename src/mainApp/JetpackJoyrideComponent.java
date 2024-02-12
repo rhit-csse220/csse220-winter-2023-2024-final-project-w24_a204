@@ -112,38 +112,55 @@ public class JetpackJoyrideComponent extends JComponent {
 
 	private void handleMissile() {
 		if (Math.random() < MISSILE_SPAWN_PERCENTAGE_CHANCE / 100 && normalMissile.getxPos() <= OFF_SCREEN) {
-//			if(currentLevelNum > 1) {
+			if(currentLevelNum > 1) {
 			normalMissile.setxPos(RIGHT_SIDE_SCREEN);
 //				normalMissile.setDelay(NORMAL_DELAY_COUNTDOWN);
-//			}
+			}
 		}
 		if (Math.random() < MISSILE_SPAWN_PERCENTAGE_CHANCE / 100 && homingMissile.getxPos() <= OFF_SCREEN) {
-//			if(currentLevelNum > 2) {
+			if(currentLevelNum > 2) {
 			homingMissile.setxPos(RIGHT_SIDE_SCREEN);
 //				homingMissile.setDelay(HOMING_DELAY_COUNTDOWN);
-//			}
+			}
 		}
-		if (emergencyShot && homingMissile.getxPos() <= OFF_SCREEN && normalMissile.getxPos() <= OFF_SCREEN
-				&& player.getxPos() > MIDDLE_OF_SCREEN) {
-			normalMissile.setxPos(RIGHT_SIDE_SCREEN);
-			homingMissile.setxPos(RIGHT_SIDE_SCREEN);
-			emergencyShot = false;
+		if (emergencyShot && normalMissile.getxPos() <= OFF_SCREEN && player.getxPos() > MIDDLE_OF_SCREEN) {
+			if(currentLevelNum > 1) {
+				normalMissile.setxPos(RIGHT_SIDE_SCREEN);
+				if(currentLevelNum > 2 && homingMissile.getxPos() <= OFF_SCREEN) {
+					homingMissile.setxPos(RIGHT_SIDE_SCREEN);
+				}
+				emergencyShot = false;
+			}
+			
 		} else if (emergencyShot && homingMissile.getxPos() <= OFF_SCREEN && player.getxPos() > MIDDLE_OF_SCREEN) {
-			homingMissile.setxPos(RIGHT_SIDE_SCREEN);
-			emergencyShot = false;
+			if(currentLevelNum > 2) {
+				homingMissile.setxPos(RIGHT_SIDE_SCREEN);
+				emergencyShot = false;
+			}
+			
 		} else if (emergencyShot && normalMissile.getxPos() <= OFF_SCREEN && player.getxPos() > MIDDLE_OF_SCREEN) {
-			normalMissile.setxPos(RIGHT_SIDE_SCREEN);
-			emergencyShot = false;
+			if(currentLevelNum > 1) {
+				normalMissile.setxPos(RIGHT_SIDE_SCREEN);
+				emergencyShot = false;
+			}
 		}
 		if (collidablesToAdd.size() == 0) {
-			normalMissile.setxPos(OFF_SCREEN);
-			homingMissile.setxPos(OFF_SCREEN);
+			if(currentLevelNum > 1) {
+				normalMissile.setxPos(OFF_SCREEN);
+				if(currentLevelNum > 2) {
+					homingMissile.setxPos(OFF_SCREEN);
+				}
+			}
 		}
 //		normalMissile.delayCountdown();
-		normalMissile.move();
-//		homingMissile.delayCountdown();
-		homingMissile.move();
-		homingMissile.homesIn(player.getxPos(), player.getyPos());
+		if(currentLevelNum > 1) {
+			normalMissile.move();
+			if(currentLevelNum > 2) {
+//				homingMissile.delayCountdown();
+				homingMissile.move();
+				homingMissile.homesIn(player.getxPos(), player.getyPos());
+			}
+		}
 	}
 
 	private void handleCollisions() {
