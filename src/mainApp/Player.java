@@ -89,4 +89,11 @@ public class Player {
 		this.lives = SET_LIFE;
 		this.coins = 0;
 	}
+	
+	public boolean nextLevel() {
+		if(this.xPos > 350) {
+			return true;
+		}
+		return false;
+	}
 }
