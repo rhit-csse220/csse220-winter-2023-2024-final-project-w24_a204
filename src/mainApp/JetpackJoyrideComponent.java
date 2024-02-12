@@ -65,7 +65,11 @@ public class JetpackJoyrideComponent extends JComponent {
 						collidablesToAdd.add(coin);
 					}
 					if (line.charAt(i) == '_') {
-						Barrier barrier = new Barrier(i * PIXEL_SIZE, countLines * PIXEL_SIZE);
+						Barrier barrier = new Barrier(i * PIXEL_SIZE, countLines * PIXEL_SIZE, false);
+						collidablesToAdd.add(barrier);
+					}
+					if (line.charAt(i) == 'S') {
+						Barrier barrier = new Barrier(i * PIXEL_SIZE, countLines * PIXEL_SIZE, true);
 						collidablesToAdd.add(barrier);
 					}
 					if (line.charAt(i) == 'H') {
