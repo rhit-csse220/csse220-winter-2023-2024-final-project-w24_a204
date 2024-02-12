@@ -19,7 +19,7 @@ public class JetpackJoyrideViewer {
 	
 	private static final int VERTICAL_FRAME_BORDER = 37;
 	private static final int HORIZONTAL_FRAME_BORDER = 14;
-	private static final int LEVEL_MAX = 2;
+	private static final int LEVEL_MAX = 3;
 	private static final int LEVEL_MIN = 1;
 	private static final int DELAY = 50;
 	private int fileNum = 1;
@@ -112,6 +112,17 @@ public class JetpackJoyrideViewer {
 						System.err.println("Moving to empty level");
 						component.getCollidables().clear();
 					}
+				}else if(fileNum > LEVEL_MAX) {
+					try {
+						component.readFile("level/gameOver.txt", 1);
+						label.setFont(new Font(null, Font.PLAIN, 20));
+						label.setBounds(5, 0, 140, 50);
+						labelLife.setText("");
+					} catch (InvalidLevelFormatException r) {
+						System.err.println(r.getMessage());
+						System.err.println("Moving to empty level");
+						component.getCollidables().clear();
+					}
 				}else {
 					component.grabFocus();
 					gameOver = component.checkGameOver();
@@ -135,10 +146,6 @@ public class JetpackJoyrideViewer {
 		
 		
 		frame.setVisible(true);
-		
-	}
-	
-	public void updateScreen() {
 		
 	}
 }
