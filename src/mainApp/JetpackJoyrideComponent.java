@@ -95,7 +95,9 @@ public class JetpackJoyrideComponent extends JComponent {
 	public void update() {
 		if (player.getLives() > 0) {
 			handlePlayer();
-			handleMissile();
+			if(currentLevel != "level/secretLevel.txt") {
+				handleMissile();
+			}
 			handleCollisions();
 		} else {
 			handlePlayer();
@@ -235,7 +237,19 @@ public class JetpackJoyrideComponent extends JComponent {
 	public int checkLives() {
 		return player.getLives();
 	}
-
+	
+	public void checkSecret() {
+		if(player.getyPos() < 5) {
+			try {
+				collidablesToAdd.clear();
+				readFile("level/secretLevel.txt", 4);
+			} catch (InvalidLevelFormatException e) {
+				System.err.println(e.getMessage());
+				System.err.println("Moving to empty level");
+				collidablesToAdd.clear();
+			}
+		}
+	}
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

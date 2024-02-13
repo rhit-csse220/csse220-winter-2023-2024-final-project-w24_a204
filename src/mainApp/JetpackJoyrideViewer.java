@@ -137,6 +137,9 @@ public class JetpackJoyrideViewer {
 				labelLife.repaint();
 				component.update();
 				coinCount = component.checkCoins();
+				if(fileNum == 4) {
+					component.checkSecret();
+				}
 			}
 			
 		});
