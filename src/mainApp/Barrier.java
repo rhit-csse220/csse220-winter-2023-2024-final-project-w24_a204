@@ -9,7 +9,7 @@ public class Barrier extends Collidable {
 
 	private static final int EDGE_LENGTH = 50;
 	private static final Color COLOR = Color.BLACK;
-	private static final Color SECRET_COLOR = new Color(51, 51, 51);
+	private static final Color SECRET_COLOR = new Color(21, 21, 21);
 	private boolean secret;
 
 	public Barrier(int xPos, int yPos, boolean secret) {
