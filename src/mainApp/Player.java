@@ -77,6 +77,10 @@ public class Player {
 		this.lives--;
 	}
 	
+	public void gainLife() {
+		this.lives++;
+	}
+	
 	public int getCoins() {
 		return coins;
 	}

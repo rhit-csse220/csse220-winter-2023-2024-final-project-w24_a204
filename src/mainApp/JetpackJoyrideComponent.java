@@ -22,10 +22,12 @@ public class JetpackJoyrideComponent extends JComponent {
 	private static final int OFF_SCREEN = -50;
 	private static final int RIGHT_SIDE_SCREEN = 1200;
 	private static final int MIDDLE_OF_SCREEN = 600;
+	private static final int BOTTOM_OF_SCREEN = 500;
 	private Player player = new Player(0, 0);
 	private ArrayList<Collidable> collidablesToAdd = new ArrayList<Collidable>();
 	private Missile normalMissile = new Missile(false);
 	private Missile homingMissile = new Missile(true);
+	private boolean powerUPExists = false;
 	private boolean emergencyShot = true;
 	private boolean keyIsPressed = false;
 	private String currentLevel;
@@ -78,6 +80,13 @@ public class JetpackJoyrideComponent extends JComponent {
 					}
 				}
 				countLines++;
+			}
+			if(fileNum%2 == 0) {
+				PowerUP power = new PowerUP(RIGHT_SIDE_SCREEN * Math.random(), BOTTOM_OF_SCREEN * Math.random());
+				collidablesToAdd.add(power);
+				powerUPExists = true;
+			} else {
+				powerUPExists = false;
 			}
 			scanner.close();
 			if (countLines == TEXT_HEIGHT) {
@@ -171,12 +180,21 @@ public class JetpackJoyrideComponent extends JComponent {
 
 	private void handleCollisions() {
 		boolean tookDamage = false;
+		boolean hadPowerUp = powerUPExists;
 		for (Collidable c : this.collidablesToAdd) {
 			if (!c.shouldRemove() && c.overlaps(player) && c.doesGetterDamage()) {
 				c.collideWith(player);
 				tookDamage = true;
 			} else if (!c.shouldRemove() && c.overlaps(player)) {
 				c.collideWith(player);
+			} else if (c.getClassName().equals("PowerUP") && !c.shouldRemove()) {
+				PowerUP power = (PowerUP)c;
+				for(Collidable o : this.collidablesToAdd) {
+					if (!(o.getClassName().equals("PowerUP")) && power.overlaps(o)) {
+						power.collideWith(o);
+						powerUPExists = false;
+					}
+				}
 			}
 		}
 
@@ -190,6 +208,10 @@ public class JetpackJoyrideComponent extends JComponent {
 		}
 		if (tookDamage) {
 			handleLevelReset();
+		}
+		if(hadPowerUp && !powerUPExists) {
+			collidablesToAdd.add(new PowerUP((RIGHT_SIDE_SCREEN - 2*PIXEL_SIZE) * Math.random() + PIXEL_SIZE, (BOTTOM_OF_SCREEN - 3*PIXEL_SIZE) * Math.random() + PIXEL_SIZE));
+			powerUPExists = true;
 		}
 
 		ArrayList<Collidable> collidablesToRemove = new ArrayList<Collidable>();

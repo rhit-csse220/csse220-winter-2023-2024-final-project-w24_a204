@@ -47,4 +47,12 @@ public abstract class Collidable {
 	public boolean overlaps(Player other) {
 		return getBoundingBox().intersects(other.getBoundingBox());
 	}
+	
+	public boolean overlaps(Collidable other) {
+		return getBoundingBox().intersects(other.getBoundingBox());
+	}
+	
+	public String getClassName() {
+		return this.getClass().getSimpleName();
+	}
 }
