@@ -19,7 +19,7 @@ public class JetpackJoyrideViewer {
 
 	private static final int VERTICAL_FRAME_BORDER = 37;
 	private static final int HORIZONTAL_FRAME_BORDER = 14;
-	private static final int LEVEL_MAX = 4;
+	private static final int LEVEL_MAX = 5;
 	private static final int LEVEL_MIN = 1;
 	private static final int DELAY = 50;
 	private int fileNum = 1;

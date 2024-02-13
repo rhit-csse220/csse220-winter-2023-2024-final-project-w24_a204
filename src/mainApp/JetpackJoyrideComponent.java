@@ -81,8 +81,8 @@ public class JetpackJoyrideComponent extends JComponent {
 				}
 				countLines++;
 			}
-			if(fileNum%2 == 0) {
-				PowerUP power = new PowerUP(RIGHT_SIDE_SCREEN * Math.random(), BOTTOM_OF_SCREEN * Math.random());
+			if(fileNum%2 == 0 && !filename.equals("level/gameOver.txt") && !filename.equals("level/win.txt") && !filename.equals("level/secretLevel.txt")) {
+				PowerUP power = new PowerUP((RIGHT_SIDE_SCREEN - 3*PIXEL_SIZE) * Math.random() + 2*PIXEL_SIZE, (BOTTOM_OF_SCREEN - 3*PIXEL_SIZE) * Math.random() + PIXEL_SIZE);
 				collidablesToAdd.add(power);
 				powerUPExists = true;
 			} else {
@@ -185,6 +185,7 @@ public class JetpackJoyrideComponent extends JComponent {
 			if (!c.shouldRemove() && c.overlaps(player) && c.doesGetterDamage()) {
 				c.collideWith(player);
 				tookDamage = true;
+				break;
 			} else if (!c.shouldRemove() && c.overlaps(player)) {
 				c.collideWith(player);
 			} else if (c.getClassName().equals("PowerUP") && !c.shouldRemove()) {
@@ -210,7 +211,7 @@ public class JetpackJoyrideComponent extends JComponent {
 			handleLevelReset();
 		}
 		if(hadPowerUp && !powerUPExists) {
-			collidablesToAdd.add(new PowerUP((RIGHT_SIDE_SCREEN - 2*PIXEL_SIZE) * Math.random() + PIXEL_SIZE, (BOTTOM_OF_SCREEN - 3*PIXEL_SIZE) * Math.random() + PIXEL_SIZE));
+			collidablesToAdd.add(new PowerUP((RIGHT_SIDE_SCREEN - 3*PIXEL_SIZE) * Math.random() + 2*PIXEL_SIZE, (BOTTOM_OF_SCREEN - 3*PIXEL_SIZE) * Math.random() + PIXEL_SIZE));
 			powerUPExists = true;
 		}
 
