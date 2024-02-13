@@ -230,12 +230,29 @@ public class JetpackJoyrideComponent extends JComponent {
 		}
 	}
 	
+	public void handleWin() {
+		while(player.getLives() > 0) {
+			player.loseLife();
+		}
+	}
+	
+	public void handleFullRestart() {
+		player.restart();
+	}
+	
 	public int checkCoins() {
 		return player.getCoins();
 	}
 	
 	public int checkLives() {
 		return player.getLives();
+	}
+	
+	public boolean checkNextLevel() {
+		if(player.getxPos() >= RIGHT_SIDE_SCREEN-PIXEL_SIZE) {
+			return true;
+		}
+		return false;
 	}
 	
 	public void checkSecret() {

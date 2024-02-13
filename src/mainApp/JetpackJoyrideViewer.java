@@ -16,7 +16,7 @@ import javax.swing.Timer;
 
 //hi
 public class JetpackJoyrideViewer {
-	
+
 	private static final int VERTICAL_FRAME_BORDER = 37;
 	private static final int HORIZONTAL_FRAME_BORDER = 14;
 	private static final int LEVEL_MAX = 4;
@@ -26,7 +26,7 @@ public class JetpackJoyrideViewer {
 	private boolean gameOver = false;
 	private int coinCount = 0;
 	private int lifeCount;
-	
+
 	public void ScreenMain() {
 		JFrame frame = new JFrame();
 		frame.setTitle("Jetpack Joyride");
@@ -36,21 +36,23 @@ public class JetpackJoyrideViewer {
 		JetpackJoyrideComponent component = new JetpackJoyrideComponent();
 		JLabel label = new JLabel("Coins: " + coinCount);
 		JLabel labelLife = new JLabel();
+		JLabel labelWin = new JLabel();
 		label.setFont(new Font(null, Font.PLAIN, 30));
 		labelLife.setFont(new Font(null, Font.PLAIN, 30));
 		try {
 			component.readFile("level/level1.txt", fileNum);
-		}catch(InvalidLevelFormatException e) {
+		} catch (InvalidLevelFormatException e) {
 			System.err.println(e.getMessage());
 			System.err.println("Moving to empty level");
-			component.getCollidables().clear(); 
-			
+			component.getCollidables().clear();
+
 		}
 		component.addKeyListener(new KeyListener() {
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-				String filename = ("level/level" + fileNum + ".txt");;
+				String filename = ("level/level" + fileNum + ".txt");
+				;
 				// TODO Auto-generated method stub
 				if (e.getKeyChar() == 'u') {
 					if (fileNum < LEVEL_MAX) {
@@ -62,15 +64,36 @@ public class JetpackJoyrideViewer {
 						fileNum--;
 						filename = ("level/level" + fileNum + ".txt");
 					}
+				} else if (e.getKeyChar() == 'q') {
+					if (fileNum > LEVEL_MAX || gameOver) {
+						System.exit(0);
+					}
+				} else if (e.getKeyChar() == 'r') {
+					if (fileNum > LEVEL_MAX || gameOver) {
+						component.handleFullRestart();
+						gameOver = false;
+						fileNum = 1;
+						filename = "level/level1.txt";
+						try {
+							component.getCollidables().clear();
+							component.readFile(filename, fileNum);
+						} catch (InvalidLevelFormatException r) {
+							System.err.println(r.getMessage());
+							System.err.println("Moving to empty level");
+							component.getCollidables().clear();
+						}
+					}
 				}
 				if (e.getKeyChar() == 'u' || e.getKeyChar() == 'd') {
-					try {
-						component.getCollidables().clear();
-						component.readFile(filename, fileNum);
-					} catch (InvalidLevelFormatException r) {
-						System.err.println(r.getMessage());
-						System.err.println("Moving to empty level");
-						component.getCollidables().clear();
+					if (fileNum <= LEVEL_MAX) {
+						try {
+							component.getCollidables().clear();
+							component.readFile(filename, fileNum);
+						} catch (InvalidLevelFormatException r) {
+							System.err.println(r.getMessage());
+							System.err.println("Moving to empty level");
+							component.getCollidables().clear();
+						}
 					}
 				}
 			}
@@ -93,62 +116,86 @@ public class JetpackJoyrideViewer {
 		});
 		frame.add(label);
 		frame.add(labelLife);
+		frame.add(labelWin);
 		frame.add(component, BorderLayout.CENTER);
-		
+
 		Timer t = new Timer(DELAY, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(gameOver) {
-					//currently pauses the game indefinitely
+				int currentLevel = fileNum;
+				if (component.checkNextLevel()) {
+					fileNum++;
+				}
+				if (gameOver) {
+					// currently pauses the game indefinitely
 					component.getCollidables().clear();
 					try {
 						component.readFile("level/gameOver.txt", 1);
-						label.setFont(new Font(null, Font.PLAIN, 20));
-						label.setBounds(5, 0, 140, 50);
+						label.setFont(new Font(null, Font.PLAIN, 50));
+						labelWin.setFont(new Font(null, Font.PLAIN, 20));
+						label.setBounds(300, 300, 700, 100);
+						labelWin.setBounds(300, 350, 700, 100);
+						label.setText("Total Coins Earned: " + coinCount);
+						labelWin.setText("<html>Press q to Quit<br/>Press r to Restart</html>");
 						labelLife.setText("");
 					} catch (InvalidLevelFormatException r) {
 						System.err.println(r.getMessage());
 						System.err.println("Moving to empty level");
 						component.getCollidables().clear();
 					}
-				}else if(fileNum > LEVEL_MAX) {
+				} else if (fileNum > LEVEL_MAX) {
+					component.getCollidables().clear();
+					component.handleWin();
 					try {
-						component.readFile("level/gameOver.txt", 1);
-						label.setFont(new Font(null, Font.PLAIN, 20));
-						label.setBounds(5, 0, 140, 50);
+						component.readFile("level/win.txt", 1);
+						label.setFont(new Font(null, Font.PLAIN, 50));
+						labelWin.setFont(new Font(null, Font.PLAIN, 20));
+						label.setBounds(300, 300, 700, 100);
+						labelWin.setBounds(300, 350, 700, 100);
+						label.setText("Total Coins Earned: " + coinCount);
+						labelWin.setText("<html>Press q to Quit<br/>Press r to Restart</html>");
 						labelLife.setText("");
 					} catch (InvalidLevelFormatException r) {
 						System.err.println(r.getMessage());
 						System.err.println("Moving to empty level");
 						component.getCollidables().clear();
 					}
-				}else {
+				} else if (currentLevel < fileNum) {
+					try {
+						component.getCollidables().clear();
+						component.readFile("level/level" + fileNum + ".txt", fileNum);
+					} catch (InvalidLevelFormatException r) {
+						System.err.println(r.getMessage());
+						System.err.println("Moving to empty level");
+						component.getCollidables().clear();
+					}
+				} else {
 					component.grabFocus();
 					gameOver = component.checkGameOver();
+					label.setFont(new Font(null, Font.PLAIN, 30));
 					label.setBounds(5, 50, 140, 50);
 					labelLife.setBounds(5, 100, 140, 50);
+					label.setText("Coins: " + coinCount);
 					labelLife.setText("Lives: " + component.checkLives());
+					labelWin.setText("");
 				}
 				component.repaint();
 				frame.repaint();
-				label.setText("Coins: " + coinCount);
 				label.repaint();
 				labelLife.repaint();
 				component.update();
 				coinCount = component.checkCoins();
-				if(fileNum == 4) {
+				if (fileNum == 4) {
 					component.checkSecret();
 				}
 			}
-			
+
 		});
-		
-		
+
 		t.start();
-		
-		
+
 		frame.setVisible(true);
-		
+
 	}
 }
