@@ -249,7 +249,7 @@ public class JetpackJoyrideComponent extends JComponent {
 				player.fall();
 			}
 		} else {
-			player.setxPos(-50);
+			player.setxPos(OFF_SCREEN);
 		}
 	}
 	
