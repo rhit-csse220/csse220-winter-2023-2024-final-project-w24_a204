@@ -42,19 +42,16 @@ public class Obstacle extends Collidable{
 
 	@Override
 	protected double getHeight() {
-		// TODO Auto-generated method stub
 		return EDGE_LENGTH;
 	}
 
 	@Override
 	protected double getWidth() {
-		// TODO Auto-generated method stub
 		return EDGE_LENGTH;
 	}
 
 	@Override
 	protected void collideWith(Player p) {
-		// TODO Auto-generated method stub
 		if(electric) {
 			p.loseLife();
 		}else {

@@ -14,7 +14,6 @@ public class Missile extends Collidable {
 	private static final Color NORMAL_COLOR = Color.ORANGE;
 	private static final Color HOMING_COLOR = new Color(255,152,0);
 	private static final int EDGE_LENGTH = 50;
-//	private int delay;
 	private boolean homing = false;
 	private double velocity;
 
@@ -32,12 +31,10 @@ public class Missile extends Collidable {
 		} else {
 			velocity = 10;
 		}
-//		this.delay = delay;
 	}
 
 	@Override
 	public void drawOn(Graphics g) {
-		// TODO Auto-generated method stub
 		
 		Graphics2D g2 = (Graphics2D) g;
 		if (yPos < 50) {
@@ -68,29 +65,12 @@ public class Missile extends Collidable {
 		}
 	}
 
-//	public void delayCountdown() {
-//		if (this.delay > 0) {
-//			if(this.homing) {
-//				this.delay -= 4;
-//			}else {
-//				this.delay -= 10;
-//			}
-//		}
-//	}
 
 	public void move() {
 		if (xPos > -50) {
 			xPos -= velocity;
 		}
 	}
-
-//	public void setDelay(int delay) {
-//		this.delay = delay;
-//	}
-//
-//	public int getDelay() {
-//		return delay;
-//	}
 
 	public double getxPos() {
 		return xPos;
@@ -110,19 +90,16 @@ public class Missile extends Collidable {
 
 	@Override
 	protected double getHeight() {
-		// TODO Auto-generated method stub
 		return EDGE_LENGTH;
 	}
 
 	@Override
 	protected double getWidth() {
-		// TODO Auto-generated method stub
 		return EDGE_LENGTH;
 	}
 
 	@Override
 	protected void collideWith(Player p) {
-		// TODO Auto-generated method stub
 		p.loseLife();
 	}
 }

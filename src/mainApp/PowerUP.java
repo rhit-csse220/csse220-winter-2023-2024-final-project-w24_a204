@@ -41,32 +41,26 @@ public class PowerUP extends Collidable {
 
 	@Override
 	protected double getHeight() {
-		// TODO Auto-generated method stub
 		return RADIUS*2;
 	}
 
 	@Override
 	protected double getWidth() {
-		// TODO Auto-generated method stub
 		return RADIUS*2;
 	}
 
 	@Override
 	protected void collideWith(Player p) {
-		// TODO Auto-generated method stub
 		this.markToRemove();
 		if(powerSelector > .5) {
 			p.gainLife();
 		}else if (powerSelector <= .5 && !p.checkShielded()){
 			p.shieldToggle();
 		}
-		//System.out.println(p.getCoins());
 	}
 	
 	protected void collideWith(Collidable c) {
-		// TODO Auto-generated method stub
 		this.markToRemove();
-		//System.out.println(p.getCoins());
 	}
 	
 	@Override

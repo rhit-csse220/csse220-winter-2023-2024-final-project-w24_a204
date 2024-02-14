@@ -44,22 +44,17 @@ public class Barrier extends Collidable {
 
 	@Override
 	protected double getHeight() {
-		// TODO Auto-generated method stub
 		return EDGE_LENGTH;
 	}
 
 	@Override
 	protected double getWidth() {
-		// TODO Auto-generated method stub
 		return EDGE_LENGTH;
 	}
 
 	@Override
 	protected void collideWith(Player p) {
-		// TODO Auto-generated method stub
-		if (secret) {
-
-		} else {
+		if (!secret) {
 			if (p.getxPos() + 45 != this.xPos) {
 				if (p.getyPos() < this.yPos && p.getyPos() > this.yPos - 50) {
 					p.setyPos(this.yPos - 50);

@@ -73,7 +73,6 @@ public class JetpackJoyrideViewer {
 			public void keyTyped(KeyEvent e) {
 				String filename = ("level/level" + fileNum + ".txt");
 				;
-				// TODO Auto-generated method stub
 				if (e.getKeyChar() == 'u') {
 					if (fileNum < LEVEL_MAX) {
 						fileNum++;
@@ -120,7 +119,6 @@ public class JetpackJoyrideViewer {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
 				if (e.getKeyCode() == 32) {
 					component.setKeyPressed(false);
 				}
@@ -128,7 +126,6 @@ public class JetpackJoyrideViewer {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
 				if (e.getKeyCode() == 32) {
 					component.setKeyPressed(true);
 				}
@@ -148,7 +145,6 @@ public class JetpackJoyrideViewer {
 					fileNum++;
 				}
 				if (gameOver) {
-					// currently pauses the game indefinitely
 					component.getCollidables().clear();
 					try {
 						component.readFile("level/gameOver.txt", 1);

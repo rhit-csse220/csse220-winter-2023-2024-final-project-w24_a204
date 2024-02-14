@@ -22,8 +22,6 @@ import javax.swing.JComponent;
 public class JetpackJoyrideComponent extends JComponent {
 	private static final int PIXEL_SIZE = 50;
 	private static final double MISSILE_SPAWN_PERCENTAGE_CHANCE = 1;
-//	private static final int NORMAL_DELAY_COUNTDOWN = 1000;
-//	private static final int HOMING_DELAY_COUNTDOWN = 250;
 	private static final int TEXT_HEIGHT = 10;
 	private static final int TEXT_WIDTH = 24;
 	private static final int OFF_SCREEN = -50;
@@ -41,10 +39,6 @@ public class JetpackJoyrideComponent extends JComponent {
 	private int currentLevelNum;
 
 	public void readFile(String filename, int fileNum) throws InvalidLevelFormatException {
-
-		// The fileNum argument is intended to be used down the road when we
-		// make the missiles spawn based on what level is being played, i.e.
-		// on level one no missiles will spawn, on level two, the regular one will
 
 		currentLevel = filename;
 		currentLevelNum = fileNum;
@@ -136,13 +130,11 @@ public class JetpackJoyrideComponent extends JComponent {
 		if (Math.random() < MISSILE_SPAWN_PERCENTAGE_CHANCE / 100 && normalMissile.getxPos() <= OFF_SCREEN) {
 			if(currentLevelNum > 1) {
 			normalMissile.setxPos(RIGHT_SIDE_SCREEN);
-//				normalMissile.setDelay(NORMAL_DELAY_COUNTDOWN);
 			}
 		}
 		if (Math.random() < MISSILE_SPAWN_PERCENTAGE_CHANCE / 100 && homingMissile.getxPos() <= OFF_SCREEN) {
 			if(currentLevelNum > 2) {
 			homingMissile.setxPos(RIGHT_SIDE_SCREEN);
-//				homingMissile.setDelay(HOMING_DELAY_COUNTDOWN);
 			}
 		}
 		if (emergencyShot && normalMissile.getxPos() <= OFF_SCREEN && player.getxPos() > MIDDLE_OF_SCREEN) {
@@ -174,11 +166,9 @@ public class JetpackJoyrideComponent extends JComponent {
 				}
 			}
 		}
-//		normalMissile.delayCountdown();
 		if(currentLevelNum > 1) {
 			normalMissile.move();
 			if(currentLevelNum > 2) {
-//				homingMissile.delayCountdown();
 				homingMissile.move();
 				homingMissile.homesIn(player.getxPos(), player.getyPos());
 			}

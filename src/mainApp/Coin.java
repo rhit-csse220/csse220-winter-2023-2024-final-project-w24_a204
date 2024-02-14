@@ -33,21 +33,17 @@ public class Coin extends Collidable{
 
 	@Override
 	protected double getHeight() {
-		// TODO Auto-generated method stub
 		return RADIUS*2;
 	}
 
 	@Override
 	protected double getWidth() {
-		// TODO Auto-generated method stub
 		return RADIUS*2;
 	}
 
 	@Override
 	protected void collideWith(Player p) {
-		// TODO Auto-generated method stub
 		this.markToRemove();
 		p.collectCoin();
-		//System.out.println(p.getCoins());
 	}
 }

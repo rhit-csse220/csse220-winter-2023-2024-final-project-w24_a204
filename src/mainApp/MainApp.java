@@ -12,7 +12,7 @@ public class MainApp {
 	private void runApp() {
 		JetpackJoyrideViewer viewer = new JetpackJoyrideViewer();
 		viewer.ScreenMain();
-	} // runApp
+	}
 
 	/**
 	 * ensures: runs the application
@@ -21,6 +21,6 @@ public class MainApp {
 	public static void main(String[] args) {
 		MainApp mainApp = new MainApp();
 		mainApp.runApp();
-	} // main
+	}
 
 }
