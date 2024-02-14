@@ -38,6 +38,12 @@ public class JetpackJoyrideComponent extends JComponent {
 	private String currentLevel;
 	private int currentLevelNum;
 
+	/**
+	 * ensures: reads a file and adds the objects to an ArrayList to be made later
+	 * @param filename the file name that readFile reads from
+	 * @param fileNum the file number
+	 * @throws InvalidLevelFormatException
+	 */
 	public void readFile(String filename, int fileNum) throws InvalidLevelFormatException {
 	
 		currentLevel = filename;
@@ -103,6 +109,9 @@ public class JetpackJoyrideComponent extends JComponent {
 		}
 	}
 
+	/**
+	 * ensures: updates every component
+	 */
 	public void update() {
 		if (player.getLives() > 0) {
 			handlePlayer();
@@ -115,18 +124,32 @@ public class JetpackJoyrideComponent extends JComponent {
 		}
 	}
 
+	/**
+	 * ensures: returns an array list of the collidables
+	 * @return an array list of collidables
+	 */
 	public ArrayList<Collidable> getCollidables() {
 		return collidablesToAdd;
 	}
 
+	/**
+	 * ensures: sets the key to if it is pressed
+	 */
 	public void setKeyPressed(boolean pressed) {
 		keyIsPressed = pressed;
 	}
 
+	/**
+	 * ensures: checks if the game is over
+	 * @return if the player is out of lives
+	 */
 	public boolean checkGameOver() {
 		return (player.getLives() == 0);
 	}
 
+	/**
+	 * ensures: handles the missiles, making them appear, move, and disappear
+	 */
 	private void handleMissile() {
 		if (Math.random() < MISSILE_SPAWN_PERCENTAGE_CHANCE / 100 && normalMissile.getxPos() <= OFF_SCREEN) {
 			if(currentLevelNum > 1) {
@@ -176,6 +199,10 @@ public class JetpackJoyrideComponent extends JComponent {
 		}
 	}
 
+	/**
+	 * ensures: handles the collisions of all collidables and player, removing collidables
+	 * when necessary and dealing damage or granting powers
+	 */
 	private void handleCollisions() {
 		boolean tookDamage = false;
 		boolean hadPowerUp = powerUPExists;
@@ -236,6 +263,9 @@ public class JetpackJoyrideComponent extends JComponent {
 		}
 	}
 
+	/**
+	 * ensures: handles the resetting of a level when player takes damage
+	 */
 	private void handleLevelReset() {
 		collidablesToAdd.clear();
 		try {
@@ -248,6 +278,9 @@ public class JetpackJoyrideComponent extends JComponent {
 
 	}
 
+	/**
+	 * ensures: handles the players movement and their iframes
+	 */
 	private void handlePlayer() {
 		if (player.getLives() > 0) {
 			player.move();
@@ -262,24 +295,39 @@ public class JetpackJoyrideComponent extends JComponent {
 		player.iframeCountdown();
 	}
 	
+	/**
+	 * ensures: handles part of what happens when you win
+	 */
 	public void handleWin() {
-		while(player.getLives() > 0) {
-			player.loseLife();
-		}
+		collidablesToAdd.clear();
+		player.die();
 	}
 	
+	/**
+	 * ensures: handles a part of a full restart
+	 */
 	public void handleFullRestart() {
 		player.restart();
 	}
 	
+	/**
+	 * ensures: checks and returns how much coins a player has
+	 */
 	public int checkCoins() {
 		return player.getCoins();
 	}
 	
+	/**
+	 * ensures: checks and returns how much coins a player has
+	 */
 	public int checkLives() {
 		return player.getLives();
 	}
 	
+	/**
+	 * ensures: checks and returns if player should move onto the next level
+	 * @return if player should move to the next level
+	 */
 	public boolean checkNextLevel() {
 		if(player.getxPos() >= RIGHT_SIDE_SCREEN-PIXEL_SIZE) {
 			return true;
@@ -287,6 +335,9 @@ public class JetpackJoyrideComponent extends JComponent {
 		return false;
 	}
 	
+	/**
+	 * ensures: checks if player should move to the secret level
+	 */
 	public void checkSecret() {
 		if(player.getyPos() < 5) {
 			try {
@@ -299,6 +350,7 @@ public class JetpackJoyrideComponent extends JComponent {
 			}
 		}
 	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

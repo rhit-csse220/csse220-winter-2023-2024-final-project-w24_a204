@@ -27,6 +27,10 @@ public class PowerUP extends Collidable {
 		powerSelector = Math.random();
 	}
 
+	/**
+	 * ensures: drawing of the PowerUP depending which power up is rolled
+	 * @param g the graphics that the PowerUP is drawn onto
+	 */
 	@Override
 	public void drawOn(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -49,6 +53,11 @@ public class PowerUP extends Collidable {
 		return RADIUS*2;
 	}
 
+	/**
+	 * ensures: that depending on which power is rolled, player recieves a different effect
+	 * when colliding with the PowerUP
+	 * @param p the player that PowerUP collides with
+	 */
 	@Override
 	protected void collideWith(Player p) {
 		this.markToRemove();
@@ -59,6 +68,10 @@ public class PowerUP extends Collidable {
 		}
 	}
 	
+	/**
+	 * ensures: that PowerUP will not be inside a Collidable
+	 * @param c the collidable that PowerUP collides with
+	 */
 	protected void collideWith(Collidable c) {
 		this.markToRemove();
 	}

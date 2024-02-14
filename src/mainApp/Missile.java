@@ -33,6 +33,11 @@ public class Missile extends Collidable {
 		}
 	}
 
+	/**
+	 * ensures: drawing of the Missile depending on if it is homing and not have it
+	 * outside the barriers
+	 * @param g the graphics that the Missile is drawn onto
+	 */
 	@Override
 	public void drawOn(Graphics g) {
 		
@@ -55,35 +60,58 @@ public class Missile extends Collidable {
 		this.setDamageTrue();
 	}
 
+	/**
+	 * ensures: homing of the 
+	 * @param otherXPos the x-position of the other object
+	 * @param otherYPos the y-position of the other object
+	 */
 	public void homesIn(double otherXPos, double otherYPos) {
 		if (this.homing) {
-			if (yPos > otherYPos && this.xPos > otherXPos) {
+			if (yPos > otherYPos-1 && this.xPos > otherXPos) {
 				yPos -= velocity;
-			} else if (yPos < otherYPos && this.xPos > otherXPos) {
+			} else if (yPos < otherYPos+1 && this.xPos > otherXPos) {
 				yPos += velocity;
 			}
 		}
 	}
 
-
+	/**
+	 * ensures: the missile moves forwards
+	 */
 	public void move() {
 		if (xPos > -50) {
 			xPos -= velocity;
 		}
 	}
 
+	/**
+	 * ensures: returns the x-position
+	 * @return the current x-position, xPos
+	 */
 	public double getxPos() {
 		return xPos;
 	}
 
+	/**
+	 * ensures: sets the x-position
+	 * @param xPos the current x-position to set this xPos to
+	 */
 	public void setxPos(int xPos) {
 		this.xPos = xPos;
 	}
 
+	/**
+	 * ensures: returns the y-position
+	 * @return the current y-position, yPos
+	 */
 	public double getyPos() {
 		return yPos;
 	}
 
+	/**
+	 * ensures: sets the y-position
+	 * @param yPos the current y-position to set this yPos to
+	 */
 	public void setyPos(int yPos) {
 		this.yPos = yPos;
 	}
@@ -98,6 +126,10 @@ public class Missile extends Collidable {
 		return EDGE_LENGTH;
 	}
 
+	/**
+	 * ensures: that if Missile collides with player, player loses a life
+	 * @param p the player that Missile collides with
+	 */
 	@Override
 	protected void collideWith(Player p) {
 		p.loseLife();

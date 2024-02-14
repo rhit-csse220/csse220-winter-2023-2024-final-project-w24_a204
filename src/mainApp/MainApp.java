@@ -8,7 +8,9 @@ package mainApp;
  */
 public class MainApp {
 	
-	
+	/**
+	 * ensures: makes the viewer and runs it
+	 */
 	private void runApp() {
 		JetpackJoyrideViewer viewer = new JetpackJoyrideViewer();
 		viewer.ScreenMain();

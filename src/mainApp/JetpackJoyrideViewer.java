@@ -35,6 +35,9 @@ public class JetpackJoyrideViewer {
 	private boolean gameOver = false;
 	private int coinCount = 0;
 
+	/**
+	 * ensures: puts everything together into the game
+	 */
 	public void ScreenMain() {
 		JFrame frame = new JFrame();
 		frame.setTitle("Jetpack Joyride");
@@ -161,7 +164,6 @@ public class JetpackJoyrideViewer {
 						component.getCollidables().clear();
 					}
 				} else if (fileNum > LEVEL_MAX) {
-					component.getCollidables().clear();
 					component.handleWin();
 					try {
 						component.readFile("level/win.txt", 1);

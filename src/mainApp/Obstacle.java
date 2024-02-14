@@ -27,6 +27,10 @@ public class Obstacle extends Collidable{
 		this.electric = electric;
 	}
 
+	/**
+	 * ensures: drawing of the Barrier depending on if it electrical
+	 * @param g the graphics that the Barrier is drawn onto
+	 */
 	@Override
 	public void drawOn(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -50,6 +54,11 @@ public class Obstacle extends Collidable{
 		return EDGE_LENGTH;
 	}
 
+	/**
+	 * ensures: that if Obstacle collides with the player, if it is electrical player loses
+	 * a life, but if the Obstacle isnt electrical, player will press against it
+	 * @param p the player that Barrier collides with
+	 */
 	@Override
 	protected void collideWith(Player p) {
 		if(electric) {
@@ -58,7 +67,7 @@ public class Obstacle extends Collidable{
 			if(p.getxPos() + 45 != this.xPos) {
 				if(p.getyPos() < this.yPos && p.getyPos() > this.yPos-50) {
 					p.setyPos(this.yPos-50);
-				}else if(p.getyPos() < this.yPos+50 && p.getyPos() > this.yPos) {
+				}else if(p.getyPos() < this.yPos+45 && p.getyPos() > this.yPos) {
 					p.setyPos(this.yPos+50);
 				}
 			}else{
