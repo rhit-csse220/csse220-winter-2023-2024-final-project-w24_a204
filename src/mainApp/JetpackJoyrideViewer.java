@@ -7,9 +7,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.Timer;
@@ -47,6 +48,18 @@ public class JetpackJoyrideViewer {
 			component.getCollidables().clear();
 
 		}
+
+		File song = new File("music/Theme.wav");
+		try {
+			AudioInputStream audioInput = AudioSystem.getAudioInputStream(song);
+			Clip clip = AudioSystem.getClip();
+			clip.open(audioInput);
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			clip.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		component.addKeyListener(new KeyListener() {
 
 			@Override
