@@ -4,6 +4,16 @@ import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 
 
+/**
+ * Class: Collidable
+ * @author A204
+ * Purpose: Acts as a superclass for everything that collides with the player
+ * during all times of the gameplay.
+ * For example: 
+ * 
+ * Collidable collidable = new Collidable(50, 50);
+ * 
+ */
 public abstract class Collidable {
 	
 	protected double xPos;

@@ -5,6 +5,18 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
+ 
+/**
+ * Class: Barrier
+ * Superclass: Collidable
+ * @author A204
+ * Purpose: Creates the barriers that are at the top and bottom of each level, 
+ * confining the player. Also creates secret barriers that lead to the secret level.
+ * For example:
+ * 
+ * Barrier barrier = new Barrier(50, 50, false);
+ * 
+ */
 public class Barrier extends Collidable {
 
 	private static final int EDGE_LENGTH = 50;

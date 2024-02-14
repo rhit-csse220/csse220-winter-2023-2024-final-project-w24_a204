@@ -15,6 +15,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
+/**
+ * Class: JetpackJoyrideViewer
+ * @author A204
+ * Purpose: Create a screen for the game to be played on, initialize a component to
+ * run the logic of the game, initializes a timer as well as KeyListeners.
+ * For example: 
+ * 
+ * JetpackJoyrideViewer viewer = new JetpackJoyrideViewer();
+ */
 public class JetpackJoyrideViewer {
 
 	private static final int VERTICAL_FRAME_BORDER = 37;

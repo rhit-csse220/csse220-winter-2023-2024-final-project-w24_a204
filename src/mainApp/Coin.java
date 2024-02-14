@@ -5,6 +5,16 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
+/**
+ * Class: Coin
+ * Superclass: Collidable
+ * @author A204
+ * Purpose: Creates a coin that can be picked up by the player.
+ * For example: 
+ * 
+ * Coin coin = new Coin(50, 50);
+ * 
+ */
 public class Coin extends Collidable{
 	private static final int RADIUS = 25;
 	private static final Color COLOR = Color.YELLOW;

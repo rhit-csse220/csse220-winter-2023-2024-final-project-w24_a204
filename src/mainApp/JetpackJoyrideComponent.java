@@ -9,6 +9,16 @@ import java.util.Scanner;
 
 import javax.swing.JComponent;
 
+/**
+ * Class: JetpackJoyrideComponent
+ * @author A204
+ * Purpose: Used to read text files and convert them into collidables that are drawn
+ * on the screen, also respawns the missiles and resets the level if needed. 
+ * For example: 
+ * 
+ * JetpackJoyrideComponent component = new JetpackJoyrideComponent();
+ * 
+ */
 public class JetpackJoyrideComponent extends JComponent {
 	private static final int PIXEL_SIZE = 50;
 	private static final double MISSILE_SPAWN_PERCENTAGE_CHANCE = 1;
