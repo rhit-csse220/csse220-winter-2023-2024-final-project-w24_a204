@@ -27,7 +27,7 @@ public class Player {
 	private boolean shielded = false;
 
 	/**
-	 * ensures that Player has a xPos and yPos
+	 * ensures that Player has a xPos and yPos:
 	 * @param xPos the x-position of the upper left corner of Player
 	 * @param yPos the y-position of the upper left corner of Player
 	 */
