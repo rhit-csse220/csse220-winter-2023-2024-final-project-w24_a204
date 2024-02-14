@@ -90,6 +90,7 @@ public abstract class Collidable {
 
 	/**
 	 * ensures: checks for overlap against player
+	 * @param other the player that Collidable may overlap
 	 * @return if it overlaps
 	 */
 	public boolean overlaps(Player other) {
@@ -98,6 +99,7 @@ public abstract class Collidable {
 	
 	/**
 	 * ensures: checks for overlap against another Collidable
+	 * @param other the collidable that Collidable may overlap
 	 * @return if it overlaps
 	 */
 	public boolean overlaps(Collidable other) {
