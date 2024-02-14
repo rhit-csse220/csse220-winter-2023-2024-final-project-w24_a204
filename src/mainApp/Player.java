@@ -5,7 +5,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
-//hi
+/**
+ * Class: Player
+ * @author A204
+ * Purpose: is the playable character
+ */
 public class Player {
 	
 	private static final int EDGE_LENGTH = 50;
@@ -19,6 +23,11 @@ public class Player {
 	private int coins = 0;
 	private boolean shielded = false;
 	
+	/**
+	 * ensures that Player has a xPos and yPos
+	 * @param xPos the x-position of the upper left corner of Player
+	 * @param yPos the y-position of the upper left corner of Player
+	 */
 	public Player(double xPos, double yPos) {
 		this.setxPos(xPos);
 		this.setyPos(yPos);

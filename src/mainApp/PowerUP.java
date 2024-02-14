@@ -5,6 +5,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
+/**
+ * Class: PowerUP
+ * @author A204
+ * Purpose: acts as a power up that player can pick up
+ */
 public class PowerUP extends Collidable {
 
 	private static final int RADIUS = 25;
@@ -12,6 +17,11 @@ public class PowerUP extends Collidable {
 	private static final Color SHIELD_COLOR = new Color(51, 204, 255);
 	private double powerSelector = 0;
 	
+	/**
+	 * ensures that PowerUP has a xPos and yPos
+	 * @param xPos the x-position of the upper left corner of PowerUP
+	 * @param yPos the y-position of the upper left corner of PowerUP
+	 */
 	public PowerUP(double xPos, double yPos) {
 		super((int)xPos, (int)yPos);
 		powerSelector = Math.random();

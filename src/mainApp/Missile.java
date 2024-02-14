@@ -5,6 +5,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
+/**
+ * Class: Missile
+ * @author A204
+ * Purpose: acts as a moving missile that harms the player
+ */
 public class Missile extends Collidable {
 	private static final Color NORMAL_COLOR = Color.ORANGE;
 	private static final Color HOMING_COLOR = new Color(255,152,0);
@@ -13,6 +18,12 @@ public class Missile extends Collidable {
 	private boolean homing = false;
 	private double velocity;
 
+	/**
+	 * ensures that PowerUP has a xPos and yPos
+	 * @param xPos the x-position of the upper left corner of Missile
+	 * @param yPos the y-position of the upper left corner of Missile
+	 * @param homing the boolean that decides if a missile is homing
+	 */
 	public Missile(boolean homing) {
 		super(1200, ((int) (450 * Math.random() + EDGE_LENGTH))/5*5);
 		this.homing = homing;

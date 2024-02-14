@@ -5,12 +5,23 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
+/**
+ * Class: Obstacle
+ * @author A204
+ * Purpose: acts as a obstacle that player can't pass
+ */
 public class Obstacle extends Collidable{
 	private static final int EDGE_LENGTH = 50;
 	private static final Color NORMAL_COLOR = Color.DARK_GRAY;
 	private static final Color ELECTRIC_COLOR = Color.RED;
 	private boolean electric;
 	
+	/**
+	 * ensures that Obstacle has a xPos and yPos
+	 * @param xPos the x-position of the upper left corner of Obstacle
+	 * @param yPos the y-position of the upper left corner of Obstacle
+	 * @param electric the boolean that determines if the obstacle is an electric one
+	 */
 	public Obstacle(int xPos, int yPos, boolean electric) {
 		super(xPos, yPos);
 		this.electric = electric;
