@@ -134,6 +134,7 @@ public class JetpackJoyrideComponent extends JComponent {
 
 	/**
 	 * ensures: sets the key to if it is pressed
+	 * @param pressed a boolean that deems if the key is pressed
 	 */
 	public void setKeyPressed(boolean pressed) {
 		keyIsPressed = pressed;
