@@ -11,12 +11,12 @@ import javax.swing.JComponent;
 
 /**
  * Class: JetpackJoyrideComponent
- * @author A204
- * Purpose: Used to read text files and convert them into collidables that are drawn
- * on the screen, also respawns the missiles and resets the level if needed. 
- * For example: 
  * 
- * JetpackJoyrideComponent component = new JetpackJoyrideComponent();
+ * @author A204 Purpose: Used to read text files and convert them into
+ *         collidables that are drawn on the screen, also respawns the missiles
+ *         and resets the level if needed. For example:
+ * 
+ *         JetpackJoyrideComponent component = new JetpackJoyrideComponent();
  * 
  */
 public class JetpackJoyrideComponent extends JComponent {
@@ -40,12 +40,13 @@ public class JetpackJoyrideComponent extends JComponent {
 
 	/**
 	 * ensures: reads a file and adds the objects to an ArrayList to be made later
+	 * 
 	 * @param filename the file name that readFile reads from
-	 * @param fileNum the file number
+	 * @param fileNum  the file number
 	 * @throws InvalidLevelFormatException
 	 */
 	public void readFile(String filename, int fileNum) throws InvalidLevelFormatException {
-	
+
 		currentLevel = filename;
 		currentLevelNum = fileNum;
 		emergencyShot = true;
@@ -89,8 +90,10 @@ public class JetpackJoyrideComponent extends JComponent {
 				}
 				countLines++;
 			}
-			if(fileNum%2 == 0 && !filename.equals("level/gameOver.txt") && !filename.equals("level/win.txt") && !filename.equals("level/secretLevel.txt")) {
-				PowerUP power = new PowerUP((RIGHT_SIDE_SCREEN - 3*PIXEL_SIZE) * Math.random() + 2*PIXEL_SIZE, (BOTTOM_OF_SCREEN - 3*PIXEL_SIZE) * Math.random() + PIXEL_SIZE);
+			if (fileNum % 2 == 0 && !filename.equals("level/gameOver.txt") && !filename.equals("level/win.txt")
+					&& !filename.equals("level/secretLevel.txt")) {
+				PowerUP power = new PowerUP((RIGHT_SIDE_SCREEN - 3 * PIXEL_SIZE) * Math.random() + 2 * PIXEL_SIZE,
+						(BOTTOM_OF_SCREEN - 3 * PIXEL_SIZE) * Math.random() + PIXEL_SIZE);
 				collidablesToAdd.add(power);
 				powerUPExists = true;
 			} else {
@@ -115,7 +118,7 @@ public class JetpackJoyrideComponent extends JComponent {
 	public void update() {
 		if (player.getLives() > 0) {
 			handlePlayer();
-			if(currentLevel != "level/secretLevel.txt") {
+			if (currentLevel != "level/secretLevel.txt") {
 				handleMissile();
 			}
 			handleCollisions();
@@ -126,6 +129,7 @@ public class JetpackJoyrideComponent extends JComponent {
 
 	/**
 	 * ensures: returns an array list of the collidables
+	 * 
 	 * @return an array list of collidables
 	 */
 	public ArrayList<Collidable> getCollidables() {
@@ -134,6 +138,7 @@ public class JetpackJoyrideComponent extends JComponent {
 
 	/**
 	 * ensures: sets the key to if it is pressed
+	 * 
 	 * @param pressed a boolean that deems if the key is pressed
 	 */
 	public void setKeyPressed(boolean pressed) {
@@ -142,6 +147,7 @@ public class JetpackJoyrideComponent extends JComponent {
 
 	/**
 	 * ensures: checks if the game is over
+	 * 
 	 * @return if the player is out of lives
 	 */
 	public boolean checkGameOver() {
@@ -153,53 +159,53 @@ public class JetpackJoyrideComponent extends JComponent {
 	 */
 	private void handleMissile() {
 		if (Math.random() < MISSILE_SPAWN_PERCENTAGE_CHANCE / 100 && normalMissile.getxPos() <= OFF_SCREEN) {
-			if(currentLevelNum > 1) {
-			normalMissile.setxPos(RIGHT_SIDE_SCREEN);
-			normalMissile.setyPos(((int) (450 * Math.random() + normalMissile.getWidth()))/5*5);
+			if (currentLevelNum > 1) {
+				normalMissile.setxPos(RIGHT_SIDE_SCREEN);
+				normalMissile.setyPos(((int) (450 * Math.random() + normalMissile.getWidth())) / 5 * 5);
 			}
 		}
 		if (Math.random() < MISSILE_SPAWN_PERCENTAGE_CHANCE / 100 && homingMissile.getxPos() <= OFF_SCREEN) {
-			if(currentLevelNum > 2) {
-			homingMissile.setxPos(RIGHT_SIDE_SCREEN);
-			homingMissile.setyPos(((int) (450 * Math.random() + homingMissile.getWidth()))/5*5);
+			if (currentLevelNum > 2) {
+				homingMissile.setxPos(RIGHT_SIDE_SCREEN);
+				homingMissile.setyPos(((int) (450 * Math.random() + homingMissile.getWidth())) / 5 * 5);
 			}
 		}
 		if (emergencyShot && normalMissile.getxPos() <= OFF_SCREEN && player.getxPos() > MIDDLE_OF_SCREEN) {
-			if(currentLevelNum > 1) {
+			if (currentLevelNum > 1) {
 				normalMissile.setxPos(RIGHT_SIDE_SCREEN);
-				normalMissile.setyPos(((int) (450 * Math.random() + normalMissile.getWidth()))/5*5);
-				if(currentLevelNum > 2 && homingMissile.getxPos() <= OFF_SCREEN) {
+				normalMissile.setyPos(((int) (450 * Math.random() + normalMissile.getWidth())) / 5 * 5);
+				if (currentLevelNum > 2 && homingMissile.getxPos() <= OFF_SCREEN) {
 					homingMissile.setxPos(RIGHT_SIDE_SCREEN);
-					homingMissile.setyPos(((int) (450 * Math.random() + homingMissile.getWidth()))/5*5);
+					homingMissile.setyPos(((int) (450 * Math.random() + homingMissile.getWidth())) / 5 * 5);
 				}
 				emergencyShot = false;
 			}
-			
+
 		} else if (emergencyShot && homingMissile.getxPos() <= OFF_SCREEN && player.getxPos() > MIDDLE_OF_SCREEN) {
-			if(currentLevelNum > 2) {
+			if (currentLevelNum > 2) {
 				homingMissile.setxPos(RIGHT_SIDE_SCREEN);
-				homingMissile.setyPos(((int) (450 * Math.random() + homingMissile.getWidth()))/5*5);
+				homingMissile.setyPos(((int) (450 * Math.random() + homingMissile.getWidth())) / 5 * 5);
 				emergencyShot = false;
 			}
-			
+
 		} else if (emergencyShot && normalMissile.getxPos() <= OFF_SCREEN && player.getxPos() > MIDDLE_OF_SCREEN) {
-			if(currentLevelNum > 1) {
+			if (currentLevelNum > 1) {
 				normalMissile.setxPos(RIGHT_SIDE_SCREEN);
-				normalMissile.setyPos(((int) (450 * Math.random() + normalMissile.getWidth()))/5*5);
+				normalMissile.setyPos(((int) (450 * Math.random() + normalMissile.getWidth())) / 5 * 5);
 				emergencyShot = false;
 			}
 		}
 		if (collidablesToAdd.size() == 0) {
-			if(currentLevelNum > 1) {
+			if (currentLevelNum > 1) {
 				normalMissile.setxPos(OFF_SCREEN);
-				if(currentLevelNum > 2) {
+				if (currentLevelNum > 2) {
 					homingMissile.setxPos(OFF_SCREEN);
 				}
 			}
 		}
-		if(currentLevelNum > 1) {
+		if (currentLevelNum > 1) {
 			normalMissile.move();
-			if(currentLevelNum > 2) {
+			if (currentLevelNum > 2) {
 				homingMissile.move();
 				homingMissile.homesIn(player.getxPos(), player.getyPos());
 			}
@@ -207,15 +213,15 @@ public class JetpackJoyrideComponent extends JComponent {
 	}
 
 	/**
-	 * ensures: handles the collisions of all collidables and player, removing collidables
-	 * when necessary and dealing damage or granting powers
+	 * ensures: handles the collisions of all collidables and player, removing
+	 * collidables when necessary and dealing damage or granting powers
 	 */
 	private void handleCollisions() {
 		boolean tookDamage = false;
 		boolean hadPowerUp = powerUPExists;
 		for (Collidable c : this.collidablesToAdd) {
 			if (!c.shouldRemove() && c.overlaps(player) && c.doesGetterDamage()) {
-				if(!player.checkShielded()) {
+				if (!player.checkShielded()) {
 					tookDamage = true;
 				}
 				c.collideWith(player);
@@ -223,8 +229,8 @@ public class JetpackJoyrideComponent extends JComponent {
 			} else if (!c.shouldRemove() && c.overlaps(player)) {
 				c.collideWith(player);
 			} else if (c.getClassName().equals("PowerUP") && !c.shouldRemove()) {
-				PowerUP power = (PowerUP)c;
-				for(Collidable o : this.collidablesToAdd) {
+				PowerUP power = (PowerUP) c;
+				for (Collidable o : this.collidablesToAdd) {
 					if (!(o.getClassName().equals("PowerUP")) && power.overlaps(o)) {
 						power.collideWith(o);
 						powerUPExists = false;
@@ -234,17 +240,17 @@ public class JetpackJoyrideComponent extends JComponent {
 		}
 
 		if (homingMissile.overlaps(player)) {
-			if(!player.checkShielded()) {
+			if (!player.checkShielded()) {
 				tookDamage = true;
-			}else {
+			} else {
 				homingMissile.setxPos(OFF_SCREEN);
 			}
 			homingMissile.collideWith(player);
 		}
 		if (normalMissile.overlaps(player)) {
-			if(!player.checkShielded()) {
+			if (!player.checkShielded()) {
 				tookDamage = true;
-			}else {
+			} else {
 				normalMissile.setxPos(OFF_SCREEN);
 			}
 			normalMissile.collideWith(player);
@@ -252,8 +258,9 @@ public class JetpackJoyrideComponent extends JComponent {
 		if (tookDamage) {
 			handleLevelReset();
 		}
-		if(hadPowerUp && !powerUPExists) {
-			collidablesToAdd.add(new PowerUP((RIGHT_SIDE_SCREEN - 3*PIXEL_SIZE) * Math.random() + 2*PIXEL_SIZE, (BOTTOM_OF_SCREEN - 3*PIXEL_SIZE) * Math.random() + PIXEL_SIZE));
+		if (hadPowerUp && !powerUPExists) {
+			collidablesToAdd.add(new PowerUP((RIGHT_SIDE_SCREEN - 3 * PIXEL_SIZE) * Math.random() + 2 * PIXEL_SIZE,
+					(BOTTOM_OF_SCREEN - 3 * PIXEL_SIZE) * Math.random() + PIXEL_SIZE));
 			powerUPExists = true;
 		}
 
@@ -298,10 +305,10 @@ public class JetpackJoyrideComponent extends JComponent {
 			}
 		} else {
 			player.setxPos(OFF_SCREEN);
-		} 
+		}
 		player.iframeCountdown();
 	}
-	
+
 	/**
 	 * ensures: handles part of what happens when you win
 	 */
@@ -309,44 +316,45 @@ public class JetpackJoyrideComponent extends JComponent {
 		collidablesToAdd.clear();
 		player.die();
 	}
-	
+
 	/**
 	 * ensures: handles a part of a full restart
 	 */
 	public void handleFullRestart() {
 		player.restart();
 	}
-	
+
 	/**
 	 * ensures: checks and returns how much coins a player has
 	 */
 	public int checkCoins() {
 		return player.getCoins();
 	}
-	
+
 	/**
 	 * ensures: checks and returns how much coins a player has
 	 */
 	public int checkLives() {
 		return player.getLives();
 	}
-	
+
 	/**
 	 * ensures: checks and returns if player should move onto the next level
+	 * 
 	 * @return if player should move to the next level
 	 */
 	public boolean checkNextLevel() {
-		if(player.getxPos() >= RIGHT_SIDE_SCREEN-PIXEL_SIZE) {
+		if (player.getxPos() >= RIGHT_SIDE_SCREEN - PIXEL_SIZE) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * ensures: checks if player should move to the secret level
 	 */
 	public void checkSecret() {
-		if(player.getyPos() < 5) {
+		if (player.getyPos() < 5) {
 			try {
 				collidablesToAdd.clear();
 				readFile("level/secretLevel.txt", 4);
@@ -357,7 +365,7 @@ public class JetpackJoyrideComponent extends JComponent {
 			}
 		}
 	}
-	
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

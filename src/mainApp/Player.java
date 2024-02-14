@@ -28,6 +28,7 @@ public class Player {
 
 	/**
 	 * ensures that Player has a xPos and yPos:
+	 * 
 	 * @param xPos the x-position of the upper left corner of Player
 	 * @param yPos the y-position of the upper left corner of Player
 	 */
@@ -59,18 +60,19 @@ public class Player {
 	public void move() {
 		xPos += X_VELOCITY;
 	}
-	
+
 	/**
 	 * ensures: counts down the iframe if player has iframes
 	 */
 	public void iframeCountdown() {
-		if(iframe > 0) {
-			iframe-=5;
+		if (iframe > 0) {
+			iframe -= 5;
 		}
 	}
 
 	/**
 	 * ensures: drawing of the Player depending on if it is shielded
+	 * 
 	 * @param g the graphics that the Player is drawn onto
 	 */
 	public void drawOn(Graphics g) {
@@ -90,6 +92,7 @@ public class Player {
 
 	/**
 	 * ensures: gets a bounding box
+	 * 
 	 * @return the bounding box
 	 */
 	public Rectangle2D.Double getBoundingBox() {
@@ -98,6 +101,7 @@ public class Player {
 
 	/**
 	 * ensures: returns the x-position
+	 * 
 	 * @return the current x-position, xPos
 	 */
 	public double getxPos() {
@@ -106,6 +110,7 @@ public class Player {
 
 	/**
 	 * ensures: sets the x-position
+	 * 
 	 * @param xPos the current x-position to set this xPos to
 	 */
 	public void setxPos(double xPos) {
@@ -114,6 +119,7 @@ public class Player {
 
 	/**
 	 * ensures: returns the y-position
+	 * 
 	 * @return the current y-position, yPos
 	 */
 	public double getyPos() {
@@ -122,20 +128,22 @@ public class Player {
 
 	/**
 	 * ensures: sets the y-position
+	 * 
 	 * @param yPos the current y-position to set this yPos to
 	 */
 	public void setyPos(double yPos) {
 		this.yPos = yPos;
 	}
-	
+
 	/**
 	 * ensures: returns the the number of lives remaining
+	 * 
 	 * @return the current remaining lives
 	 */
 	public int getLives() {
 		return lives;
 	}
-	
+
 	/**
 	 * ensures: sets the players' life to 0
 	 */
@@ -144,7 +152,8 @@ public class Player {
 	}
 
 	/**
-	 * ensures: player loses a life if they aren't shielded or have been recently hit
+	 * ensures: player loses a life if they aren't shielded or have been recently
+	 * hit
 	 */
 	public void loseLife() {
 		if (shielded) {
@@ -164,6 +173,7 @@ public class Player {
 
 	/**
 	 * ensures: returns the coins that player is holding
+	 * 
 	 * @return the current coin count
 	 */
 	public int getCoins() {
@@ -187,6 +197,7 @@ public class Player {
 
 	/**
 	 * ensures: returns the shielded status of player
+	 * 
 	 * @return if player is shielded
 	 */
 	public boolean checkShielded() {

@@ -17,12 +17,12 @@ import javax.swing.Timer;
 
 /**
  * Class: JetpackJoyrideViewer
- * @author A204
- * Purpose: Create a screen for the game to be played on, initialize a component to
- * run the logic of the game, initializes a timer as well as KeyListeners.
- * For example: 
  * 
- * JetpackJoyrideViewer viewer = new JetpackJoyrideViewer();
+ * @author A204 Purpose: Create a screen for the game to be played on,
+ *         initialize a component to run the logic of the game, initializes a
+ *         timer as well as KeyListeners. For example:
+ * 
+ *         JetpackJoyrideViewer viewer = new JetpackJoyrideViewer();
  */
 public class JetpackJoyrideViewer {
 

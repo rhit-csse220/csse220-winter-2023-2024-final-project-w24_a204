@@ -2,12 +2,14 @@ package mainApp;
 
 /**
  * Class: MainApp
- * @author A204
- * <br>Purpose: Top level class for CSSE220 Project containing main method 
- * <br>Restrictions: None
+ * 
+ * @author A204 <br>
+ *         Purpose: Top level class for CSSE220 Project containing main method
+ *         <br>
+ *         Restrictions: None
  */
 public class MainApp {
-	
+
 	/**
 	 * ensures: makes the viewer and runs it
 	 */
@@ -18,6 +20,7 @@ public class MainApp {
 
 	/**
 	 * ensures: runs the application
+	 * 
 	 * @param args unused
 	 */
 	public static void main(String[] args) {
