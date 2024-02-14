@@ -259,6 +259,7 @@ public class JetpackJoyrideComponent extends JComponent {
 		} else {
 			player.setxPos(OFF_SCREEN);
 		}
+		player.iframeCountdown();
 	}
 	
 	public void handleWin() {
