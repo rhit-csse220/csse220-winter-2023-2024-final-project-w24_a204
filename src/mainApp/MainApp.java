@@ -1,7 +1,5 @@
 package mainApp;
 
-import java.awt.event.KeyListener;
-
 /**
  * Class: MainApp
  * @author A204

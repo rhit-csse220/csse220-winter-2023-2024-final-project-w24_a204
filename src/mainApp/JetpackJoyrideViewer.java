@@ -15,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
-//hi
 public class JetpackJoyrideViewer {
 
 	private static final int VERTICAL_FRAME_BORDER = 37;
@@ -26,7 +25,6 @@ public class JetpackJoyrideViewer {
 	private int fileNum = 1;
 	private boolean gameOver = false;
 	private int coinCount = 0;
-	private int lifeCount;
 
 	public void ScreenMain() {
 		JFrame frame = new JFrame();

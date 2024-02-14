@@ -2,8 +2,6 @@ package mainApp;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -11,7 +9,6 @@ import java.util.Scanner;
 
 import javax.swing.JComponent;
 
-//hi
 public class JetpackJoyrideComponent extends JComponent {
 	private static final int PIXEL_SIZE = 50;
 	private static final double MISSILE_SPAWN_PERCENTAGE_CHANCE = 1;
