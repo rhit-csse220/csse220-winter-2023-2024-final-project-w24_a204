@@ -183,8 +183,10 @@ public class JetpackJoyrideComponent extends JComponent {
 		boolean hadPowerUp = powerUPExists;
 		for (Collidable c : this.collidablesToAdd) {
 			if (!c.shouldRemove() && c.overlaps(player) && c.doesGetterDamage()) {
+				if(!player.checkShielded()) {
+					tookDamage = true;
+				}
 				c.collideWith(player);
-				tookDamage = true;
 				break;
 			} else if (!c.shouldRemove() && c.overlaps(player)) {
 				c.collideWith(player);
@@ -200,12 +202,20 @@ public class JetpackJoyrideComponent extends JComponent {
 		}
 
 		if (homingMissile.overlaps(player)) {
+			if(!player.checkShielded()) {
+				tookDamage = true;
+			}else {
+				homingMissile.setxPos(OFF_SCREEN);
+			}
 			homingMissile.collideWith(player);
-			handleLevelReset();
 		}
 		if (normalMissile.overlaps(player)) {
+			if(!player.checkShielded()) {
+				tookDamage = true;
+			}else {
+				normalMissile.setxPos(OFF_SCREEN);
+			}
 			normalMissile.collideWith(player);
-			handleLevelReset();
 		}
 		if (tookDamage) {
 			handleLevelReset();

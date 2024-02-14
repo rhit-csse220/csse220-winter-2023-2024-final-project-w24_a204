@@ -37,8 +37,8 @@ public class JetpackJoyrideViewer {
 		JLabel label = new JLabel("Coins: " + coinCount);
 		JLabel labelLife = new JLabel();
 		JLabel labelWin = new JLabel();
-		label.setFont(new Font(null, Font.PLAIN, 30));
-		labelLife.setFont(new Font(null, Font.PLAIN, 30));
+		label.setFont(new Font(null, Font.PLAIN, 25));
+		labelLife.setFont(new Font(null, Font.PLAIN, 25));
 		try {
 			component.readFile("level/level1.txt", fileNum);
 		} catch (InvalidLevelFormatException e) {
@@ -134,7 +134,7 @@ public class JetpackJoyrideViewer {
 						component.readFile("level/gameOver.txt", 1);
 						label.setFont(new Font(null, Font.PLAIN, 50));
 						labelWin.setFont(new Font(null, Font.PLAIN, 20));
-						label.setBounds(300, 300, 700, 100);
+						label.setBounds(300, 300, 800, 100);
 						labelWin.setBounds(300, 350, 700, 100);
 						label.setText("Total Coins Earned: " + coinCount);
 						labelWin.setText("<html>Press q to Quit<br/>Press r to Restart</html>");
@@ -151,7 +151,7 @@ public class JetpackJoyrideViewer {
 						component.readFile("level/win.txt", 1);
 						label.setFont(new Font(null, Font.PLAIN, 50));
 						labelWin.setFont(new Font(null, Font.PLAIN, 20));
-						label.setBounds(300, 300, 700, 100);
+						label.setBounds(300, 300, 800, 100);
 						labelWin.setBounds(300, 350, 700, 100);
 						label.setText("Total Coins Earned: " + coinCount);
 						labelWin.setText("<html>Press q to Quit<br/>Press r to Restart</html>");
@@ -173,8 +173,8 @@ public class JetpackJoyrideViewer {
 				} else {
 					component.grabFocus();
 					gameOver = component.checkGameOver();
-					label.setFont(new Font(null, Font.PLAIN, 30));
-					label.setBounds(5, 50, 140, 50);
+					label.setFont(new Font(null, Font.PLAIN, 25));
+					label.setBounds(5, 50, 145, 50);
 					labelLife.setBounds(5, 100, 140, 50);
 					label.setText("Coins: " + coinCount);
 					labelLife.setText("Lives: " + component.checkLives());

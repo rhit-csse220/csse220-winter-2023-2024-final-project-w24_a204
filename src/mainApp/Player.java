@@ -17,6 +17,7 @@ public class Player {
 	private static final double X_VELOCITY = 5;
 	private int lives = SET_LIFE;
 	private int coins = 0;
+	private boolean shielded = false;
 	
 	public Player(double xPos, double yPos) {
 		this.setxPos(xPos);
@@ -74,7 +75,11 @@ public class Player {
 	}
 	
 	public void loseLife() {
-		this.lives--;
+		if(shielded) {
+			shielded = false;
+		}else {
+			this.lives--;
+		}
 	}
 	
 	public void gainLife() {
@@ -92,6 +97,14 @@ public class Player {
 	public void restart() {
 		this.lives = SET_LIFE;
 		this.coins = 0;
+	}
+	
+	public boolean checkShielded() {
+		return shielded;
+	}
+	
+	public void shieldToggle() {
+		shielded = !shielded;
 	}
 	
 	public boolean nextLevel() {
