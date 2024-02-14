@@ -39,9 +39,10 @@ public class JetpackJoyrideComponent extends JComponent {
 	private int currentLevelNum;
 
 	public void readFile(String filename, int fileNum) throws InvalidLevelFormatException {
-
+	
 		currentLevel = filename;
 		currentLevelNum = fileNum;
+		emergencyShot = true;
 		int countLines = 0;
 		File file = new File(filename);
 
