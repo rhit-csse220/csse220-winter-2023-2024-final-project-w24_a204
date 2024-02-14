@@ -133,5 +133,6 @@ public class Missile extends Collidable {
 	@Override
 	protected void collideWith(Player p) {
 		p.loseLife();
+		this.yPos = (((int) (450 * Math.random() + EDGE_LENGTH))/5*5);
 	}
 }

@@ -67,7 +67,7 @@ public class Obstacle extends Collidable{
 			if(p.getxPos() + 45 != this.xPos) {
 				if(p.getyPos() < this.yPos && p.getyPos() > this.yPos-50) {
 					p.setyPos(this.yPos-50);
-				}else if(p.getyPos() < this.yPos+45 && p.getyPos() > this.yPos) {
+				}else if(p.getyPos() < this.yPos+50 && p.getyPos() > this.yPos) {
 					p.setyPos(this.yPos+50);
 				}
 			}else{

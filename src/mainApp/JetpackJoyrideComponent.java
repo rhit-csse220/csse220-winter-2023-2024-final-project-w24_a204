@@ -155,18 +155,22 @@ public class JetpackJoyrideComponent extends JComponent {
 		if (Math.random() < MISSILE_SPAWN_PERCENTAGE_CHANCE / 100 && normalMissile.getxPos() <= OFF_SCREEN) {
 			if(currentLevelNum > 1) {
 			normalMissile.setxPos(RIGHT_SIDE_SCREEN);
+			normalMissile.setyPos(((int) (450 * Math.random() + normalMissile.getWidth()))/5*5);
 			}
 		}
 		if (Math.random() < MISSILE_SPAWN_PERCENTAGE_CHANCE / 100 && homingMissile.getxPos() <= OFF_SCREEN) {
 			if(currentLevelNum > 2) {
 			homingMissile.setxPos(RIGHT_SIDE_SCREEN);
+			homingMissile.setyPos(((int) (450 * Math.random() + homingMissile.getWidth()))/5*5);
 			}
 		}
 		if (emergencyShot && normalMissile.getxPos() <= OFF_SCREEN && player.getxPos() > MIDDLE_OF_SCREEN) {
 			if(currentLevelNum > 1) {
 				normalMissile.setxPos(RIGHT_SIDE_SCREEN);
+				normalMissile.setyPos(((int) (450 * Math.random() + normalMissile.getWidth()))/5*5);
 				if(currentLevelNum > 2 && homingMissile.getxPos() <= OFF_SCREEN) {
 					homingMissile.setxPos(RIGHT_SIDE_SCREEN);
+					homingMissile.setyPos(((int) (450 * Math.random() + homingMissile.getWidth()))/5*5);
 				}
 				emergencyShot = false;
 			}
@@ -174,12 +178,14 @@ public class JetpackJoyrideComponent extends JComponent {
 		} else if (emergencyShot && homingMissile.getxPos() <= OFF_SCREEN && player.getxPos() > MIDDLE_OF_SCREEN) {
 			if(currentLevelNum > 2) {
 				homingMissile.setxPos(RIGHT_SIDE_SCREEN);
+				homingMissile.setyPos(((int) (450 * Math.random() + homingMissile.getWidth()))/5*5);
 				emergencyShot = false;
 			}
 			
 		} else if (emergencyShot && normalMissile.getxPos() <= OFF_SCREEN && player.getxPos() > MIDDLE_OF_SCREEN) {
 			if(currentLevelNum > 1) {
 				normalMissile.setxPos(RIGHT_SIDE_SCREEN);
+				normalMissile.setyPos(((int) (450 * Math.random() + normalMissile.getWidth()))/5*5);
 				emergencyShot = false;
 			}
 		}
